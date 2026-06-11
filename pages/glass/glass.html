@@ -13,6 +13,9 @@
             --card: #141026;
             --card2: #1b1432;
             --purple: #8b5cf6;
+            --yellow: #fbbf24;
+            --yellow-light: #fef3c7;
+            --yellow-dark: #d97706;
             --text: #fff;
             --muted: #b9a6ff;
         }
@@ -24,22 +27,31 @@
 
         .roi-card {
             background: var(--card);
-            border: 1px solid #312e81;
+            border: 1px solid #422006;
             border-radius: 18px;
             padding: 25px;
             margin-bottom: 20px;
         }
 
             .roi-card h2 {
-                margin-bottom: 20px;
-                color: #ddd6fe;
+                margin-bottom: 10px;
+                color: var(--yellow);
                 font-size: 20px;
             }
 
                 .roi-card h2 i {
                     margin-right: 8px;
-                    color: var(--purple);
                 }
+
+        .roi-tooltip {
+            background: var(--yellow-light);
+            color: #78350f;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--yellow);
+        }
 
         .roi-input {
             width: 100%;
@@ -47,10 +59,31 @@
             border: none;
             border-radius: 12px;
             background: #22193d;
-            color: #fff;
+            color: var(--yellow-light);
             font-size: 16px;
             margin-bottom: 15px;
         }
+
+            .roi-input::placeholder {
+                color: #666;
+            }
+
+        .roi-dropdown {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: #22193d;
+            color: var(--yellow-light);
+            font-size: 16px;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+            .roi-dropdown option {
+                background: #141026;
+                color: #fff;
+            }
 
         .roi-grid {
             display: grid;
@@ -60,6 +93,7 @@
 
         .roi-box {
             background: var(--card2);
+            border: 1px solid #422006;
             padding: 20px;
             border-radius: 14px;
             text-align: center;
@@ -74,11 +108,11 @@
         .roi-value {
             font-size: 24px;
             font-weight: bold;
-            color: #fff;
+            color: var(--yellow);
         }
 
-        .roi-purple {
-            color: var(--purple);
+        .roi-yellow {
+            color: var(--yellow);
         }
 
         .roi-tabs {
@@ -91,7 +125,7 @@
         .roi-tab {
             padding: 12px 20px;
             background: var(--card2);
-            border: none;
+            border: 1px solid #422006;
             border-radius: 10px;
             color: var(--muted);
             cursor: pointer;
@@ -99,8 +133,14 @@
         }
 
             .roi-tab.active {
-                background: var(--purple);
-                color: #fff;
+                background: var(--yellow);
+                color: #000;
+                border-color: var(--yellow);
+            }
+
+            .roi-tab:hover:not(.active) {
+                background: #2d2755;
+                color: var(--yellow-light);
             }
     </style>
 </head>
@@ -131,96 +171,171 @@
         <div class="container">
             <div class="roi-container">
                 <div class="roi-tabs">
-                    <button class="roi-tab active" onclick="showGlass('sgu',this)">SGU</button>
-                    <button class="roi-tab" onclick="showGlass('dgu',this)">DGU</button>
-                    <button class="roi-tab" onclick="showGlass('lam',this)">Laminated</button>
-                    <button class="roi-tab" onclick="showGlass('dguLam',this)">DGU + Lam</button>
-                    <button class="roi-tab" onclick="showGlass('doubleLam',this)">Double Lam</button>
-                    <button class="roi-tab" onclick="showGlass('tripleLam',this)">Triple Lam</button>
+                    <button class="roi-tab active" onclick="showGlass('sgu',this)"><i class="fa-solid fa-layer-group"></i> SGU</button>
+                    <button class="roi-tab" onclick="showGlass('dgu',this)"><i class="fa-solid fa-border-all"></i> DGU</button>
+                    <button class="roi-tab" onclick="showGlass('lam',this)"><i class="fa-solid fa-clone"></i> Laminated</button>
+                    <button class="roi-tab" onclick="showGlass('dguLam',this)"><i class="fa-solid fa-columns"></i> DGU + Lam</button>
+                    <button class="roi-tab" onclick="showGlass('doubleLam',this)"><i class="fa-solid fa-grip-lines"></i> Double Lam</button>
+                    <button class="roi-tab" onclick="showGlass('tripleLam',this)"><i class="fa-solid fa-grip-vertical"></i> Triple Lam</button>
                 </div>
 
                 <!-- SGU -->
                 <div class="roi-card" id="sgu">
                     <h2><i class="fa-solid fa-layer-group"></i> Single Glass Unit (SGU)</h2>
+                    <div class="roi-tooltip"><i class="fa-solid fa-circle-info"></i> <strong>SGU</strong> = Single toughened glass pane. Use for windows, doors, partitions. Formula: Area × Thickness × 2.5</div>
                     <input type="number" id="sguL" class="roi-input" placeholder="Length (mm)">
                     <input type="number" id="sguH" class="roi-input" placeholder="Height (mm)">
-                    <input type="number" id="sguT" class="roi-input" placeholder="Thickness 4-19mm" value="6">
+                    <select id="sguT" class="roi-dropdown">
+                        <option value="4">4 mm</option>
+                        <option value="5">5 mm</option>
+                        <option value="6" selected>6 mm</option>
+                        <option value="8">8 mm</option>
+                        <option value="10">10 mm</option>
+                        <option value="12">12 mm</option>
+                        <option value="15">15 mm</option>
+                        <option value="19">19 mm</option>
+                    </select>
                     <div class="roi-grid">
                         <div class="roi-box"><div class="roi-label">Area</div><div class="roi-value" id="sguArea">0 m²</div></div>
-                        <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-purple" id="sguWeight">0 kg</div></div>
+                        <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-yellow" id="sguWeight">0 kg</div></div>
                     </div>
                 </div>
 
                 <!-- DGU -->
                 <div class="roi-card" id="dgu" style="display:none;">
                     <h2><i class="fa-solid fa-border-all"></i> Double Glass Unit (DGU)</h2>
+                    <div class="roi-tooltip"><i class="fa-solid fa-circle-info"></i> <strong>DGU</strong> = Two glass panes with air gap. Best insulation, sound reduction. Used for windows, facades. Formula: Area × (Glass1+Glass2) × 2.5</div>
                     <input type="number" id="dguL" class="roi-input" placeholder="Length (mm)">
                     <input type="number" id="dguH" class="roi-input" placeholder="Height (mm)">
-                    <input type="number" id="dguT1" class="roi-input" placeholder="Glass 1 (4-19mm)" value="6">
-                    <input type="number" id="dguT2" class="roi-input" placeholder="Glass 2 (4-19mm)" value="6">
+                    <select id="dguT1" class="roi-dropdown">
+                        <option value="4">4 mm</option>
+                        <option value="5">5 mm</option>
+                        <option value="6" selected>6 mm</option>
+                        <option value="8">8 mm</option>
+                        <option value="10">10 mm</option>
+                    </select>
+                    <select id="dguT2" class="roi-dropdown">
+                        <option value="4">4 mm</option>
+                        <option value="5">5 mm</option>
+                        <option value="6" selected>6 mm</option>
+                        <option value="8">8 mm</option>
+                        <option value="10">10 mm</option>
+                    </select>
                     <div class="roi-grid">
                         <div class="roi-box"><div class="roi-label">Area</div><div class="roi-value" id="dguArea">0 m²</div></div>
-                        <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-purple" id="dguWeight">0 kg</div></div>
+                        <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-yellow" id="dguWeight">0 kg</div></div>
                     </div>
                 </div>
 
                 <!-- Laminated -->
                 <div class="roi-card" id="lam" style="display:none;">
                     <h2><i class="fa-solid fa-clone"></i> Laminated Glass</h2>
+                    <div class="roi-tooltip"><i class="fa-solid fa-circle-info"></i> <strong>Laminated</strong> = Glass + PVB interlayer + Glass. Safety glass, shatter-proof. Used for balustrades, canopies, skylights. Formula: Area × (Glass1+PVB+Glass2) × 2.5</div>
                     <input type="number" id="lamL" class="roi-input" placeholder="Length (mm)">
                     <input type="number" id="lamH" class="roi-input" placeholder="Height (mm)">
-                    <input type="number" id="lamT1" class="roi-input" placeholder="Glass 1 (4-19mm)" value="6">
-                    <input type="number" id="lamT2" class="roi-input" placeholder="PVB (mm)" value="0.38">
-                    <input type="number" id="lamT3" class="roi-input" placeholder="Glass 2 (4-19mm)" value="6">
+                    <select id="lamT1" class="roi-dropdown">
+                        <option value="4">4 mm</option>
+                        <option value="5">5 mm</option>
+                        <option value="6" selected>6 mm</option>
+                        <option value="8">8 mm</option>
+                        <option value="10">10 mm</option>
+                    </select>
+                    <input type="number" id="lamT2" class="roi-input" placeholder="PVB (mm)" value="0.38" readonly>
+                    <select id="lamT3" class="roi-dropdown">
+                        <option value="4">4 mm</option>
+                        <option value="5">5 mm</option>
+                        <option value="6" selected>6 mm</option>
+                        <option value="8">8 mm</option>
+                        <option value="10">10 mm</option>
+                    </select>
                     <div class="roi-grid">
                         <div class="roi-box"><div class="roi-label">Area</div><div class="roi-value" id="lamArea">0 m²</div></div>
-                        <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-purple" id="lamWeight">0 kg</div></div>
+                        <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-yellow" id="lamWeight">0 kg</div></div>
                     </div>
                 </div>
 
                 <!-- DGU + Lam -->
                 <div class="roi-card" id="dguLam" style="display:none;">
                     <h2><i class="fa-solid fa-columns"></i> DGU + Laminated</h2>
+                    <div class="roi-tooltip"><i class="fa-solid fa-circle-info"></i> <strong>DGU + Lam</strong> = Combination of DGU and Laminated. Maximum insulation + safety. Used for high-rise buildings. Formula: Area × (2×DGU + Laminated) × 2.5</div>
                     <input type="number" id="dguLamL" class="roi-input" placeholder="Length (mm)">
                     <input type="number" id="dguLamH" class="roi-input" placeholder="Height (mm)">
-                    <input type="number" id="dguLamT1" class="roi-input" placeholder="DGU Glass (4-19mm)" value="6">
-                    <input type="number" id="dguLamT2" class="roi-input" placeholder="Lam Glass (4-19mm)" value="6">
-                    <input type="number" id="dguLamPVB" class="roi-input" placeholder="PVB (mm)" value="0.38">
+                    <select id="dguLamT1" class="roi-dropdown">
+                        <option value="4">4 mm</option>
+                        <option value="5">5 mm</option>
+                        <option value="6" selected>6 mm</option>
+                        <option value="8">8 mm</option>
+                    </select>
+                    <select id="dguLamT2" class="roi-dropdown">
+                        <option value="4">4 mm</option>
+                        <option value="5">5 mm</option>
+                        <option value="6" selected>6 mm</option>
+                        <option value="8">8 mm</option>
+                    </select>
+                    <input type="number" id="dguLamPVB" class="roi-input" placeholder="PVB (mm)" value="0.38" readonly>
                     <div class="roi-grid">
                         <div class="roi-box"><div class="roi-label">Area</div><div class="roi-value" id="dguLamArea">0 m²</div></div>
-                        <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-purple" id="dguLamWeight">0 kg</div></div>
+                        <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-yellow" id="dguLamWeight">0 kg</div></div>
                     </div>
                 </div>
 
                 <!-- Double Lam -->
                 <div class="roi-card" id="doubleLam" style="display:none;">
                     <h2><i class="fa-solid fa-grip-lines"></i> Double Laminated</h2>
+                    <div class="roi-tooltip"><i class="fa-solid fa-circle-info"></i> <strong>Double Lam</strong> = Two laminated glass units stacked. Extra strength, blast-resistant. Used for facades, overhead glazing. Formula: Area × (2× Laminated) × 2.5</div>
                     <input type="number" id="dblL" class="roi-input" placeholder="Length (mm)">
                     <input type="number" id="dblH" class="roi-input" placeholder="Height (mm)">
-                    <input type="number" id="dblT1" class="roi-input" placeholder="Glass 1 (4-19mm)" value="6">
-                    <input type="number" id="dblPVB1" class="roi-input" placeholder="PVB 1 (mm)" value="0.38">
-                    <input type="number" id="dblT2" class="roi-input" placeholder="Glass 2 (4-19mm)" value="6">
-                    <input type="number" id="dblPVB2" class="roi-input" placeholder="PVB 2 (mm)" value="0.38">
+                    <select id="dblT1" class="roi-dropdown">
+                        <option value="4">4 mm</option>
+                        <option value="5">5 mm</option>
+                        <option value="6" selected>6 mm</option>
+                        <option value="8">8 mm</option>
+                    </select>
+                    <input type="number" id="dblPVB1" class="roi-input" value="0.38" readonly>
+                    <select id="dblT2" class="roi-dropdown">
+                        <option value="4">4 mm</option>
+                        <option value="5">5 mm</option>
+                        <option value="6" selected>6 mm</option>
+                        <option value="8">8 mm</option>
+                    </select>
+                    <input type="number" id="dblPVB2" class="roi-input" value="0.38" readonly>
                     <div class="roi-grid">
                         <div class="roi-box"><div class="roi-label">Area</div><div class="roi-value" id="dblArea">0 m²</div></div>
-                        <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-purple" id="dblWeight">0 kg</div></div>
+                        <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-yellow" id="dblWeight">0 kg</div></div>
                     </div>
                 </div>
+
 
                 <!-- Triple Lam -->
                 <div class="roi-card" id="tripleLam" style="display:none;">
                     <h2><i class="fa-solid fa-grip-vertical"></i> Triple Laminated</h2>
+                    <div class="roi-tooltip"><i class="fa-solid fa-circle-info"></i> <strong>Triple Lam</strong> = Three laminated glass layers. Maximum security, hurricane-resistant. Used for banks, prisons, high-security areas. Formula: Area × (3× Laminated) × 2.5</div>
                     <input type="number" id="triL" class="roi-input" placeholder="Length (mm)">
                     <input type="number" id="triH" class="roi-input" placeholder="Height (mm)">
-                    <input type="number" id="triT1" class="roi-input" placeholder="Glass 1 (4-19mm)" value="6">
-                    <input type="number" id="triPVB1" class="roi-input" placeholder="PVB 1 (mm)" value="0.38">
-                    <input type="number" id="triT2" class="roi-input" placeholder="Glass 2 (4-19mm)" value="6">
-                    <input type="number" id="triPVB2" class="roi-input" placeholder="PVB 2 (mm)" value="0.38">
-                    <input type="number" id="triT3" class="roi-input" placeholder="Glass 3 (4-19mm)" value="6">
-                    <input type="number" id="triPVB3" class="roi-input" placeholder="PVB 3 (mm)" value="0.38">
+                    <select id="triT1" class="roi-dropdown">
+                        <option value="4">4 mm</option>
+                        <option value="5">5 mm</option>
+                        <option value="6" selected>6 mm</option>
+                        <option value="8">8 mm</option>
+                    </select>
+                    <input type="number" id="triPVB1" class="roi-input" value="0.38" readonly>
+                    <select id="triT2" class="roi-dropdown">
+                        <option value="4">4 mm</option>
+                        <option value="5">5 mm</option>
+                        <option value="6" selected>6 mm</option>
+                        <option value="8">8 mm</option>
+                    </select>
+                    <input type="number" id="triPVB2" class="roi-input" value="0.38" readonly>
+                    <select id="triT3" class="roi-dropdown">
+                        <option value="4">4 mm</option>
+                        <option value="5">5 mm</option>
+                        <option value="6" selected>6 mm</option>
+                        <option value="8">8 mm</option>
+                    </select>
+                    <input type="number" id="triPVB3" class="roi-input" value="0.38" readonly>
                     <div class="roi-grid">
                         <div class="roi-box"><div class="roi-label">Area</div><div class="roi-value" id="triArea">0 m²</div></div>
-                        <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-purple" id="triWeight">0 kg</div></div>
+                        <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-yellow" id="triWeight">0 kg</div></div>
                     </div>
                 </div>
             </div>

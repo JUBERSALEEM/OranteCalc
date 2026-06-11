@@ -95,40 +95,33 @@ function calcTripleLam() {
     document.getElementById("triWeight").innerText = weight.toFixed(2) + " kg";
 }
 
-// Event Listeners
+// ============ INPUT EVENT LISTENERS ============
 document.getElementById("sguL").addEventListener("input", calcSGU);
 document.getElementById("sguH").addEventListener("input", calcSGU);
-document.getElementById("sguT").addEventListener("input", calcSGU);
+document.getElementById("sguT").addEventListener("change", calcSGU); // dropdown
 
 document.getElementById("dguL").addEventListener("input", calcDGU);
 document.getElementById("dguH").addEventListener("input", calcDGU);
-document.getElementById("dguT1").addEventListener("input", calcDGU);
-document.getElementById("dguT2").addEventListener("input", calcDGU);
+document.getElementById("dguT1").addEventListener("change", calcDGU); // dropdown
+document.getElementById("dguT2").addEventListener("change", calcDGU); // dropdown
 
 document.getElementById("lamL").addEventListener("input", calcLam);
 document.getElementById("lamH").addEventListener("input", calcLam);
-document.getElementById("lamT1").addEventListener("input", calcLam);
-document.getElementById("lamT2").addEventListener("input", calcLam);
-document.getElementById("lamT3").addEventListener("input", calcLam);
+document.getElementById("lamT1").addEventListener("change", calcLam); // dropdown
+document.getElementById("lamT3").addEventListener("change", calcLam); // dropdown
 
 document.getElementById("dguLamL").addEventListener("input", calcDguLam);
 document.getElementById("dguLamH").addEventListener("input", calcDguLam);
-document.getElementById("dguLamT1").addEventListener("input", calcDguLam);
-document.getElementById("dguLamT2").addEventListener("input", calcDguLam);
-document.getElementById("dguLamPVB").addEventListener("input", calcDguLam);
+document.getElementById("dguLamT1").addEventListener("change", calcDguLam); // dropdown
+document.getElementById("dguLamT2").addEventListener("change", calcDguLam); // dropdown
 
 document.getElementById("dblL").addEventListener("input", calcDoubleLam);
 document.getElementById("dblH").addEventListener("input", calcDoubleLam);
-document.getElementById("dblT1").addEventListener("input", calcDoubleLam);
-document.getElementById("dblPVB1").addEventListener("input", calcDoubleLam);
-document.getElementById("dblT2").addEventListener("input", calcDoubleLam);
-document.getElementById("dblPVB2").addEventListener("input", calcDoubleLam);
+document.getElementById("dblT1").addEventListener("change", calcDoubleLam); // dropdown
+document.getElementById("dblT2").addEventListener("change", calcDoubleLam); // dropdown
 
 document.getElementById("triL").addEventListener("input", calcTripleLam);
 document.getElementById("triH").addEventListener("input", calcTripleLam);
-document.getElementById("triT1").addEventListener("input", calcTripleLam);
-document.getElementById("triPVB1").addEventListener("input", calcTripleLam);
-document.getElementById("triT2").addEventListener("input", calcTripleLam);
-document.getElementById("triPVB2").addEventListener("input", calcTripleLam);
-document.getElementById("triT3").addEventListener("input", calcTripleLam);
-document.getElementById("triPVB3").addEventListener("input", calcTripleLam);
+document.getElementById("triT1").addEventListener("change", calcTripleLam); // dropdown
+document.getElementById("triT2").addEventListener("change", calcTripleLam); // dropdown
+document.getElementById("triT3").addEventListener("change", calcTripleLam); // dropdown
