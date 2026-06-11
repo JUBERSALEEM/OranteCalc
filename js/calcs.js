@@ -1,72 +1,48 @@
 /* ============================================
-   ORANTE CALC - CALCULATOR FUNCTIONS
+   ORANTE CALC - ROI CALCULATOR (MATCHES YOUR CODE)
    ============================================ */
 
-// ===== ROI Calculator =====
-function calculateROI() {
-    // Get input values
-    const initialInput = document.getElementById('initial-investment');
-    const finalInput = document.getElementById('final-value');
+// Get tiered rate (matching your code)
+function getRate(amount) {
+    if (amount <= 500) return 0.0125;
+    if (amount >= 501 && amount <= 5000) return 0.015;
+    if (amount >= 5001 && amount <= 15000) return 0.0175;
+    if (amount >= 15001) return 0.02;
+    return 0;
+}
 
-    const initial = parseFloat(initialInput.value);
-    const final = parseFloat(finalInput.value);
+function calculateROI() {
+    const initial = parseFloat(document.getElementById('initial-investment').value);
     const years = parseFloat(document.getElementById('years').value) || 0;
     const months = parseFloat(document.getElementById('months').value) || 0;
 
-    // Debug - check values
-    console.log('Initial:', initialInput.value);
-    console.log('Final:', finalInput.value);
-    console.log('Parsed Initial:', initial);
-    console.log('Parsed Final:', final);
-
-    // Validation - with better error messages
-    if (!initialInput.value || initialInput.value.trim() === '') {
-        alert('Please enter initial investment amount');
-        initialInput.focus();
+    if (isNaN(initial) || initial <= 0) {
+        alert('Please enter valid investment amount');
         return;
     }
 
-    if (!finalInput.value || finalInput.value.trim() === '') {
-        alert('Please enter final value');
-        finalInput.focus();
-        return;
-    }
+    // Get rate based on tier
+    const rate = getRate(initial);
 
-    if (isNaN(initial) || isNaN(final)) {
-        alert('Please enter valid numbers only');
-        return;
-    }
+    // Calculate based on your formula
+    const totalReturn = initial * rate;
+    const roiPercent = rate * 100;
 
-    if (initial === 0) {
-        alert('Initial investment cannot be zero');
-        return;
-    }
-
-    // Calculate Total Return (Profit/Loss)
-    const totalReturn = final - initial;
-
-    // Calculate ROI Percentage
-    const roiPercent = (totalReturn / initial) * 100;
-
-    // Calculate time in years
+    // Time calculation
     const totalYears = years + (months / 12);
     let annualizedROI = 0;
 
     if (totalYears > 0) {
-        annualizedROI = (Math.pow((final / initial), (1 / totalYears)) - 1) * 100;
+        annualizedROI = (Math.pow((initial + totalReturn) / initial, (1 / totalYears)) - 1) * 100;
     } else {
         annualizedROI = roiPercent;
     }
 
-    console.log('Total Return:', totalReturn);
-    console.log('ROI %:', roiPercent);
-    console.log('Annualized %:', annualizedROI);
-
-    // Display results
-    document.getElementById('total-return').textContent = '$' + totalReturn.toLocaleString();
+    // Display
+    document.getElementById('roi-rate').textContent = (rate * 100).toFixed(2) + '%';
+    document.getElementById('total-return').textContent = '$' + totalReturn.toFixed(2);
     document.getElementById('roi-percent').textContent = roiPercent.toFixed(2) + '%';
     document.getElementById('annualized-roi').textContent = annualizedROI.toFixed(2) + '%';
 
-    // Show result box
     document.getElementById('result-box').classList.add('show');
 }
