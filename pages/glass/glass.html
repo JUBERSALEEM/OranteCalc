@@ -13,9 +13,8 @@
             --card: #141026;
             --card2: #1b1432;
             --purple: #8b5cf6;
-            --text: #ffffff;
+            --text: #fff;
             --muted: #b9a6ff;
-            --gold: #fbbf24;
         }
 
         .roi-container {
@@ -37,13 +36,18 @@
                 font-size: 20px;
             }
 
+                .roi-card h2 i {
+                    margin-right: 8px;
+                    color: var(--purple);
+                }
+
         .roi-input {
             width: 100%;
             padding: 14px;
             border: none;
             border-radius: 12px;
             background: #22193d;
-            color: white;
+            color: #fff;
             font-size: 16px;
             margin-bottom: 15px;
         }
@@ -70,7 +74,7 @@
         .roi-value {
             font-size: 24px;
             font-weight: bold;
-            color: white;
+            color: #fff;
         }
 
         .roi-purple {
@@ -96,7 +100,7 @@
 
             .roi-tab.active {
                 background: var(--purple);
-                color: white;
+                color: #fff;
             }
     </style>
 </head>
@@ -119,7 +123,7 @@
 
     <header class="hero" style="padding:60px 0;min-height:auto;">
         <div class="container hero-content">
-            <h1>🪟 Glass Weight Calculator</h1>
+            <h1><i class="fa-solid fa-window-maximize"></i> Glass Weight Calculator</h1>
             <p>Calculate glass weight for all glass types</p>
         </div>
     </header>
@@ -127,8 +131,6 @@
     <section class="page-content">
         <div class="container">
             <div class="roi-container">
-
-                <!-- Glass Type Tabs -->
                 <div class="roi-tabs">
                     <button class="roi-tab active" onclick="showGlass('sgu',this)">SGU</button>
                     <button class="roi-tab" onclick="showGlass('dgu',this)">DGU</button>
@@ -140,10 +142,10 @@
 
                 <!-- SGU -->
                 <div class="roi-card" id="sgu">
-                    <h2>Single Glass Unit (SGU)</h2>
+                    <h2><i class="fa-solid fa-layer-group"></i> Single Glass Unit (SGU)</h2>
                     <input type="number" id="sguL" class="roi-input" placeholder="Length (mm)">
                     <input type="number" id="sguH" class="roi-input" placeholder="Height (mm)">
-                    <input type="number" id="sguT" class="roi-input" placeholder="Thickness (mm)">
+                    <input type="number" id="sguT" class="roi-input" placeholder="Thickness 4-19mm" value="6">
                     <div class="roi-grid">
                         <div class="roi-box"><div class="roi-label">Area</div><div class="roi-value" id="sguArea">0 m²</div></div>
                         <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-purple" id="sguWeight">0 kg</div></div>
@@ -152,11 +154,11 @@
 
                 <!-- DGU -->
                 <div class="roi-card" id="dgu" style="display:none;">
-                    <h2>Double Glass Unit (DGU)</h2>
+                    <h2><i class="fa-solid fa-border-all"></i> Double Glass Unit (DGU)</h2>
                     <input type="number" id="dguL" class="roi-input" placeholder="Length (mm)">
                     <input type="number" id="dguH" class="roi-input" placeholder="Height (mm)">
-                    <input type="number" id="dguT1" class="roi-input" placeholder="Glass 1 (mm)">
-                    <input type="number" id="dguT2" class="roi-input" placeholder="Glass 2 (mm)">
+                    <input type="number" id="dguT1" class="roi-input" placeholder="Glass 1 (4-19mm)" value="6">
+                    <input type="number" id="dguT2" class="roi-input" placeholder="Glass 2 (4-19mm)" value="6">
                     <div class="roi-grid">
                         <div class="roi-box"><div class="roi-label">Area</div><div class="roi-value" id="dguArea">0 m²</div></div>
                         <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-purple" id="dguWeight">0 kg</div></div>
@@ -165,12 +167,12 @@
 
                 <!-- Laminated -->
                 <div class="roi-card" id="lam" style="display:none;">
-                    <h2>Laminated Glass</h2>
+                    <h2><i class="fa-solid fa-clone"></i> Laminated Glass</h2>
                     <input type="number" id="lamL" class="roi-input" placeholder="Length (mm)">
                     <input type="number" id="lamH" class="roi-input" placeholder="Height (mm)">
-                    <input type="number" id="lamT1" class="roi-input" placeholder="Glass 1 (mm)">
+                    <input type="number" id="lamT1" class="roi-input" placeholder="Glass 1 (4-19mm)" value="6">
                     <input type="number" id="lamT2" class="roi-input" placeholder="PVB (mm)" value="0.38">
-                    <input type="number" id="lamT3" class="roi-input" placeholder="Glass 2 (mm)">
+                    <input type="number" id="lamT3" class="roi-input" placeholder="Glass 2 (4-19mm)" value="6">
                     <div class="roi-grid">
                         <div class="roi-box"><div class="roi-label">Area</div><div class="roi-value" id="lamArea">0 m²</div></div>
                         <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-purple" id="lamWeight">0 kg</div></div>
@@ -179,9 +181,12 @@
 
                 <!-- DGU + Lam -->
                 <div class="roi-card" id="dguLam" style="display:none;">
-                    <h2>DGU + Laminated</h2>
+                    <h2><i class="fa-solid fa-columns"></i> DGU + Laminated</h2>
                     <input type="number" id="dguLamL" class="roi-input" placeholder="Length (mm)">
                     <input type="number" id="dguLamH" class="roi-input" placeholder="Height (mm)">
+                    <input type="number" id="dguLamT1" class="roi-input" placeholder="DGU Glass (4-19mm)" value="6">
+                    <input type="number" id="dguLamT2" class="roi-input" placeholder="Lam Glass (4-19mm)" value="6">
+                    <input type="number" id="dguLamPVB" class="roi-input" placeholder="PVB (mm)" value="0.38">
                     <div class="roi-grid">
                         <div class="roi-box"><div class="roi-label">Area</div><div class="roi-value" id="dguLamArea">0 m²</div></div>
                         <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-purple" id="dguLamWeight">0 kg</div></div>
@@ -190,9 +195,13 @@
 
                 <!-- Double Lam -->
                 <div class="roi-card" id="doubleLam" style="display:none;">
-                    <h2>Double Laminated</h2>
+                    <h2><i class="fa-solid fa-grip-lines"></i> Double Laminated</h2>
                     <input type="number" id="dblL" class="roi-input" placeholder="Length (mm)">
                     <input type="number" id="dblH" class="roi-input" placeholder="Height (mm)">
+                    <input type="number" id="dblT1" class="roi-input" placeholder="Glass 1 (4-19mm)" value="6">
+                    <input type="number" id="dblPVB1" class="roi-input" placeholder="PVB 1 (mm)" value="0.38">
+                    <input type="number" id="dblT2" class="roi-input" placeholder="Glass 2 (4-19mm)" value="6">
+                    <input type="number" id="dblPVB2" class="roi-input" placeholder="PVB 2 (mm)" value="0.38">
                     <div class="roi-grid">
                         <div class="roi-box"><div class="roi-label">Area</div><div class="roi-value" id="dblArea">0 m²</div></div>
                         <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-purple" id="dblWeight">0 kg</div></div>
@@ -201,15 +210,20 @@
 
                 <!-- Triple Lam -->
                 <div class="roi-card" id="tripleLam" style="display:none;">
-                    <h2>Triple Laminated</h2>
+                    <h2><i class="fa-solid fa-grip-vertical"></i> Triple Laminated</h2>
                     <input type="number" id="triL" class="roi-input" placeholder="Length (mm)">
                     <input type="number" id="triH" class="roi-input" placeholder="Height (mm)">
+                    <input type="number" id="triT1" class="roi-input" placeholder="Glass 1 (4-19mm)" value="6">
+                    <input type="number" id="triPVB1" class="roi-input" placeholder="PVB 1 (mm)" value="0.38">
+                    <input type="number" id="triT2" class="roi-input" placeholder="Glass 2 (4-19mm)" value="6">
+                    <input type="number" id="triPVB2" class="roi-input" placeholder="PVB 2 (mm)" value="0.38">
+                    <input type="number" id="triT3" class="roi-input" placeholder="Glass 3 (4-19mm)" value="6">
+                    <input type="number" id="triPVB3" class="roi-input" placeholder="PVB 3 (mm)" value="0.38">
                     <div class="roi-grid">
                         <div class="roi-box"><div class="roi-label">Area</div><div class="roi-value" id="triArea">0 m²</div></div>
                         <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-purple" id="triWeight">0 kg</div></div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -219,62 +233,6 @@
     </footer>
 
     <script src="../../js/main.js"></script>
-    <script>
-        function showGlass(type, btn) {
-            document.querySelectorAll('.roi-card').forEach(c => c.style.display = 'none');
-            document.getElementById(type).style.display = 'block';
-            document.querySelectorAll('.roi-tab').forEach(t => t.classList.remove('active'));
-            btn.classList.add('active');
-        }
-
-        function calcSGU() {
-            let l = Number(document.getElementById("sguL").value) / 1000;
-            let h = Number(document.getElementById("sguH").value) / 1000;
-            let t = Number(document.getElementById("sguT").value) || 4;
-            if (isNaN(l) || isNaN(h)) return;
-            let area = l * h;
-            let weight = area * t * 2.5;
-            document.getElementById("sguArea").innerText = area.toFixed(2) + " m²";
-            document.getElementById("sguWeight").innerText = weight.toFixed(2) + " kg";
-        }
-
-        function calcDGU() {
-            let l = Number(document.getElementById("dguL").value) / 1000;
-            let h = Number(document.getElementById("dguH").value) / 1000;
-            let t1 = Number(document.getElementById("dguT1").value) || 4;
-            let t2 = Number(document.getElementById("dguT2").value) || 4;
-            if (isNaN(l) || isNaN(h)) return;
-            let area = l * h;
-            let weight = area * (t1 + t2) * 2.5;
-            document.getElementById("dguArea").innerText = area.toFixed(2) + " m²";
-            document.getElementById("dguWeight").innerText = weight.toFixed(2) + " kg";
-        }
-
-        function calcLam() {
-            let l = Number(document.getElementById("lamL").value) / 1000;
-            let h = Number(document.getElementById("lamH").value) / 1000;
-            let t1 = Number(document.getElementById("lamT1").value) || 4;
-            let pvb = Number(document.getElementById("lamT2").value) || 0.38;
-            let t2 = Number(document.getElementById("lamT3").value) || 4;
-            if (isNaN(l) || isNaN(h)) return;
-            let area = l * h;
-            let weight = area * (t1 + pvb + t2) * 2.5;
-            document.getElementById("lamArea").innerText = area.toFixed(2) + " m²";
-            document.getElementById("lamWeight").innerText = weight.toFixed(2) + " kg";
-        }
-
-        document.getElementById("sguL").addEventListener("input", calcSGU);
-        document.getElementById("sguH").addEventListener("input", calcSGU);
-        document.getElementById("sguT").addEventListener("input", calcSGU);
-        document.getElementById("dguL").addEventListener("input", calcDGU);
-        document.getElementById("dguH").addEventListener("input", calcDGU);
-        document.getElementById("dguT1").addEventListener("input", calcDGU);
-        document.getElementById("dguT2").addEventListener("input", calcDGU);
-        document.getElementById("lamL").addEventListener("input", calcLam);
-        document.getElementById("lamH").addEventListener("input", calcLam);
-        document.getElementById("lamT1").addEventListener("input", calcLam);
-        document.getElementById("lamT2").addEventListener("input", calcLam);
-        document.getElementById("lamT3").addEventListener("input", calcLam);
-    </script>
+    <script src="js/glass.js"></script>
 </body>
 </html>
