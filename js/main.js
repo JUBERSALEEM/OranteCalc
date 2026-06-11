@@ -2,7 +2,7 @@
    ORANTE CALC - MAIN JAVASCRIPT FILE
    ============================================ */
 
-// ===== DOM ELEMENTS =====
+// DOM ELEMENTS
 const body = document.body;
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.getElementById('navLinks');
@@ -10,11 +10,10 @@ const themeToggle = document.querySelector('.theme-toggle');
 const themeIcon = document.querySelector('#theme-icon');
 const themeText = document.querySelector('#theme-text');
 
-// ===== MOBILE MENU TOGGLE =====
+// MOBILE MENU TOGGLE
 function toggleMobileMenu() {
     if (navLinks) {
         navLinks.classList.toggle('active');
-
         const icon = mobileMenuBtn.querySelector('i');
         if (navLinks.classList.contains('active')) {
             icon.classList.remove('fa-bars');
@@ -26,20 +25,15 @@ function toggleMobileMenu() {
     }
 }
 
-// Add event listener if button exists
 if (mobileMenuBtn) {
     mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 }
 
-// ===== THEME TOGGLE (Dark/Light Mode) =====
+// THEME TOGGLE
 function toggleTheme() {
     body.classList.toggle('light-mode');
-
-    // Save preference to localStorage
     const isLight = body.classList.contains('light-mode');
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
-
-    // Update icon and text
     if (themeIcon) {
         if (isLight) {
             themeIcon.classList.remove('fa-moon');
@@ -53,7 +47,7 @@ function toggleTheme() {
     }
 }
 
-// ===== LOAD SAVED THEME ON PAGE LOAD =====
+// LOAD SAVED THEME
 function loadTheme() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
@@ -66,22 +60,17 @@ function loadTheme() {
     }
 }
 
-// Initialize theme
 loadTheme();
 
-// Add click event if toggle exists
 if (themeToggle) {
     themeToggle.addEventListener('click', toggleTheme);
 }
 
-// ===== DROPDOWN HOVER EFFECT (Desktop) =====
+// DROPDOWN HOVER
 function initDropdowns() {
-    // Only enable hover dropdowns on desktop (width > 1024px)
     if (window.innerWidth > 1024) {
         const dropdowns = document.querySelectorAll('.dropdown');
-
         dropdowns.forEach(dropdown => {
-            // Mouse Enter
             dropdown.addEventListener('mouseenter', () => {
                 const menu = dropdown.querySelector('.dropdown-menu');
                 if (menu) {
@@ -90,8 +79,6 @@ function initDropdowns() {
                     menu.style.transform = 'translateY(0)';
                 }
             });
-
-            // Mouse Leave
             dropdown.addEventListener('mouseleave', () => {
                 const menu = dropdown.querySelector('.dropdown-menu');
                 if (menu) {
@@ -104,38 +91,29 @@ function initDropdowns() {
     }
 }
 
-// Initialize dropdowns
 initDropdowns();
-
-// Re-init dropdowns on window resize
 window.addEventListener('resize', initDropdowns);
 
-// ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
+// SMOOTH SCROLL
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
         if (href !== '#') {
             e.preventDefault();
             const target = document.querySelector(href);
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
         }
     });
 });
 
-// ===== NUMBER ANIMATION FOR STATS =====
+// NUMBER ANIMATION
 function animateNumbers() {
     const counters = document.querySelectorAll('.stat-number[data-target]');
-
     counters.forEach(counter => {
         const target = parseInt(counter.getAttribute('data-target'));
         const duration = 2000;
         const step = target / (duration / 16);
         let current = 0;
-
         const updateCounter = () => {
             current += step;
             if (current < target) {
@@ -145,30 +123,24 @@ function animateNumbers() {
                 counter.textContent = target;
             }
         };
-
-        // Start animation
         updateCounter();
     });
 }
 
-// Run on page load
 animateNumbers();
 
-// ===== SET ACTIVE NAV LINK =====
+// SET ACTIVE NAV LINK
 function setActiveNavLink() {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-
     document.querySelectorAll('.nav-links a').forEach(link => {
         const href = link.getAttribute('href');
-        if (href === currentPage) {
-            link.classList.add('active');
-        }
+        if (href === currentPage) link.classList.add('active');
     });
 }
 
 setActiveNavLink();
 
-// ===== CLOSE MOBILE MENU ON CLICK OUTSIDE =====
+// CLOSE MOBILE MENU ON CLICK OUTSIDE
 document.addEventListener('click', function (e) {
     if (navLinks && navLinks.classList.contains('active')) {
         if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
@@ -182,17 +154,15 @@ document.addEventListener('click', function (e) {
     }
 });
 
-// ===== UTILITY: FORMAT NUMBERS =====
+// UTILITIES
 function formatNumber(num) {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-// ===== UTILITY: FORMAT CURRENCY =====
 function formatCurrency(amount, currency = '$') {
     return currency + formatNumber(amount.toFixed(2));
 }
 
-// ===== UTILITY: SHOW/HIDE ELEMENTS =====
 function showElement(elementId) {
     const el = document.getElementById(elementId);
     if (el) el.style.display = 'block';
@@ -205,28 +175,5 @@ function hideElement(elementId) {
 
 function toggleElement(elementId) {
     const el = document.getElementById(elementId);
-    if (el) {
-        if (el.style.display === 'none') {
-            el.style.display = 'block';
-        } else {
-            el.style.display = 'none';
-        }
-    }
-}
-
-// ===== EXPORT: MAKE FILES AVAILABLE =====
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        toggleMobileMenu,
-        toggleTheme,
-        loadTheme,
-        initDropdowns,
-        animateNumbers,
-        setActiveNavLink,
-        formatNumber,
-        formatCurrency,
-        showElement,
-        hideElement,
-        toggleElement
-    };
+    if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
 }

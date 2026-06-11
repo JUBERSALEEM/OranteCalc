@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Resume Template</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Righteous&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 10px;
+            line-height: 1.5;
+            color: #fff;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 20px;
+            max-width: 210mm;
+            margin: 0 auto;
+        }
+
+        .resume-layout {
+            display: grid;
+            grid-template-columns: 30% 70%;
+        }
+
+        .sidebar {
+            background: linear-gradient(180deg, #e94560 0%, #0f3460 100%);
+            padding: 25px 15px;
+            border-radius: 20px 0 0 20px;
+        }
+
+        .main {
+            padding: 25px 20px;
+        }
+
+        .resume-name {
+            font-family: 'Righteous', cursive;
+            font-size: 24px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .resume-title {
+            font-size: 10px;
+            color: #e94560;
+            margin-bottom: 20px;
+        }
+
+        .resume-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 9px;
+        }
+
+            .resume-contact span {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+        .resume-section {
+            margin-bottom: 15px;
+        }
+
+        .resume-section-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #e94560;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #e94560;
+        }
+
+        .resume-item {
+            margin-bottom: 12px;
+        }
+
+        .resume-company {
+            font-weight: 600;
+            color: #fff;
+            font-size: 11px;
+        }
+
+        .resume-date {
+            font-size: 9px;
+            color: #aaa;
+        }
+
+        .resume-skill {
+            display: inline-block;
+            background: rgba(233, 69, 96, 0.3);
+            border: 1px solid #e94560;
+            color: #fff;
+            padding: 4px 10px;
+            margin: 3px;
+            border-radius: 15px;
+            font-size: 9px;
+        }
+
+        .resume-summary {
+            color: #ccc;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-layout">
+        <div class="sidebar">
+            <div class="resume-name" id="resumeName">YOUR NAME</div>
+            <div class="resume-title" id="resumeTitle">Creative Professional</div>
+
+            <div class="resume-contact">
+                <span><i class="fa-solid fa-envelope"></i> <span id="resumeEmail">email@example.com</span></span>
+                <span><i class="fa-solid fa-phone"></i> <span id="resumePhone">+971 50 123 4567</span></span>
+                <span><i class="fa-brands fa-linkedin"></i> <span id="resumeLinkedin">linkedin.com</span></span>
+                <span><i class="fa-solid fa-location-dot"></i> <span id="resumeAddress">City</span></span>
+            </div>
+
+            <div class="resume-section">
+                <div class="resume-section-title">Skills</div>
+                <div id="resumeSkills">
+                    <span class="resume-skill">Design</span>
+                    <span class="resume-skill">Creative</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="resume-section">
+                <div class="resume-section-title">About Me</div>
+                <div class="resume-summary" id="resumeSummary">Creative professional with passion...</div>
+            </div>
+
+            <div class="resume-section">
+                <div class="resume-section-title">Experience</div>
+                <div id="resumeExperience">
+                    <div class="resume-item">
+                        <div class="resume-company">Company Name</div>
+                        <div class="resume-date">2020 - Present</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <div class="resume-section-title">Education</div>
+                <div id="resumeEducation">
+                    <div class="resume-item">
+                        <div class="resume-company">University Name</div>
+                        <div class="resume-date">Bachelor's Degree</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

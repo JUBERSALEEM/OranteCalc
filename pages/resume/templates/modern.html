@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Resume Template</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 11px;
+            line-height: 1.5;
+            color: #1e293b;
+            background: #fff;
+            padding: 30px;
+            max-width: 210mm;
+            margin: 0 auto;
+        }
+
+        .resume-layout {
+            display: grid;
+            grid-template-columns: 35% 65%;
+            gap: 20px;
+        }
+
+        .sidebar {
+            background: #1e40af;
+            color: #fff;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+            .sidebar .resume-section-title {
+                color: #fff;
+                border-color: #60a5fa;
+            }
+
+            .sidebar .resume-skill {
+                background: rgba(255,255,255,0.2);
+                color: #fff;
+            }
+
+        .main-content {
+            padding-left: 20px;
+        }
+
+        .resume-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e40af;
+        }
+
+        .resume-title {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .resume-section {
+            margin-top: 15px;
+        }
+
+        .resume-section-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #1e40af;
+            border-bottom: 2px solid #1e40af;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .resume-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-size: 10px;
+        }
+
+            .resume-contact span {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+        .resume-item {
+            margin-bottom: 12px;
+        }
+
+        .resume-company {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .resume-date {
+            font-size: 10px;
+            color: #64748b;
+        }
+
+        .resume-description {
+            font-size: 10px;
+            margin-top: 3px;
+        }
+
+        .resume-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .resume-skill {
+            background: #e2e8f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 9px;
+        }
+
+        .resume-summary {
+            font-size: 10px;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-layout">
+        <div class="sidebar">
+            <div class="resume-name" id="resumeName">YOUR NAME</div>
+            <div class="resume-title" id="resumeTitle">Professional Title</div>
+
+            <div class="resume-contact">
+                <span><i class="fa-solid fa-envelope"></i> <span id="resumeEmail">email@example.com</span></span>
+                <span><i class="fa-solid fa-phone"></i> <span id="resumePhone">+971 50 123 4567</span></span>
+                <span><i class="fa-brands fa-linkedin"></i> <span id="resumeLinkedin">linkedin.com</span></span>
+                <span><i class="fa-solid fa-location-dot"></i> <span id="resumeAddress">City, Country</span></span>
+            </div>
+
+            <div class="resume-section">
+                <div class="resume-section-title">Skills</div>
+                <div class="resume-skills" id="resumeSkills">
+                    <span class="resume-skill">Skill 1</span>
+                    <span class="resume-skill">Skill 2</span>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <div class="resume-section-title">Education</div>
+                <div id="resumeEducation">
+                    <div class="resume-item">
+                        <div class="resume-company">University</div>
+                        <div class="resume-date">Bachelor's Degree</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="resume-section">
+                <div class="resume-section-title">Summary</div>
+                <div class="resume-summary" id="resumeSummary">Professional summary...</div>
+            </div>
+
+            <div class="resume-section">
+                <div class="resume-section-title">Experience</div>
+                <div id="resumeExperience">
+                    <div class="resume-item">
+                        <div class="resume-item-header">
+                            <span class="resume-company">Company</span>
+                            <span class="resume-date">2020 - Present</span>
+                        </div>
+                        <div class="resume-description">Job description...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

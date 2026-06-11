@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS Resume Template</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 11px;
+            line-height: 1.4;
+            color: #333;
+            background: #fff;
+            padding: 20px;
+            max-width: 210mm;
+            margin: 0 auto;
+        }
+
+        .resume-header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2563eb;
+        }
+
+        .resume-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e40af;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .resume-title {
+            font-size: 12px;
+            color: #475569;
+            margin-top: 3px;
+        }
+
+        .resume-contact {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 8px;
+            font-size: 10px;
+        }
+
+            .resume-contact span {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+
+        .resume-section {
+            margin-top: 12px;
+        }
+
+        .resume-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #1e40af;
+            text-transform: uppercase;
+            border-bottom: 1px solid #94a3b8;
+            padding-bottom: 3px;
+            margin-bottom: 8px;
+        }
+
+        .resume-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .resume-item {
+            margin-bottom: 8px;
+        }
+
+        .resume-item-header {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .resume-company {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .resume-date {
+            color: #64748b;
+            font-size: 10px;
+        }
+
+        .resume-position {
+            font-size: 10px;
+            color: #475569;
+            font-style: italic;
+        }
+
+        .resume-location {
+            font-size: 10px;
+            color: #64748b;
+        }
+
+        .resume-description {
+            font-size: 10px;
+            margin-top: 4px;
+            text-align: justify;
+        }
+
+        .resume-education {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .resume-school {
+            font-weight: 600;
+        }
+
+        .resume-degree {
+            font-size: 10px;
+        }
+
+        .resume-grade {
+            font-size: 10px;
+            color: #64748b;
+        }
+
+        .resume-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .resume-skill {
+            background: #e2e8f0;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+        }
+
+        .resume-summary {
+            font-size: 10px;
+            text-align: justify;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+
+            .resume-section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-header">
+        <div class="resume-name" id="resumeName">YOUR NAME</div>
+        <div class="resume-title" id="resumeTitle">Professional Title</div>
+        <div class="resume-contact">
+            <span><i class="fa-solid fa-envelope"></i> <span id="resumeEmail">email@example.com</span></span>
+            <span><i class="fa-solid fa-phone"></i> <span id="resumePhone">+971 50 123 4567</span></span>
+            <span><i class="fa-brands fa-linkedin"></i> <span id="resumeLinkedin">linkedin.com</span></span>
+            <span><i class="fa-solid fa-location-dot"></i> <span id="resumeAddress">City, Country</span></span>
+        </div>
+    </div>
+
+    <div class="resume-section">
+        <div class="resume-section-title">Professional Summary</div>
+        <div class="resume-summary" id="resumeSummary">Experienced professional with proven track record...</div>
+    </div>
+
+    <div class="resume-section">
+        <div class="resume-section-title">Work Experience</div>
+        <div id="resumeExperience">
+            <div class="resume-item">
+                <div class="resume-item-header">
+                    <span class="resume-company">Company Name</span>
+                    <span class="resume-date">Jan 2020 - Present</span>
+                </div>
+                <div class="resume-position">Job Title</div>
+                <div class="resume-location">Location</div>
+                <div class="resume-description">• Responsible for...<br>• Achieved...</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="resume-section">
+        <div class="resume-section-title">Education</div>
+        <div id="resumeEducation">
+            <div class="resume-item resume-education">
+                <div>
+                    <div class="resume-school">University Name</div>
+                    <div class="resume-degree">Bachelor's in Engineering</div>
+                </div>
+                <div class="resume-date">2016 - 2020</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="resume-section">
+        <div class="resume-section-title">Skills</div>
+        <div class="resume-skills" id="resumeSkills">
+            <span class="resume-skill">Skill 1</span>
+            <span class="resume-skill">Skill 2</span>
+            <span class="resume-skill">Skill 3</span>
+        </div>
+    </div>
+
+    <div class="resume-section">
+        <div class="resume-section-title">Certifications</div>
+        <div id="resumeCertifications">
+            <div class="resume-item">
+                <div class="resume-item-header">
+                    <span class="resume-company">Certificate Name</span>
+                    <span class="resume-date">2023</span>
+                </div>
+                <div class="resume-degree">Issuing Organization</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="resume-section">
+        <div class="resume-section-title">Projects</div>
+        <div id="resumeProjects">
+            <div class="resume-item">
+                <div class="resume-item-header">
+                    <span class="resume-company">Project Name</span>
+                </div>
+                <div class="resume-description">Project description...</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
