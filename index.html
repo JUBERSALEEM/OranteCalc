@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orante Calc | Professional Multi-Calculator Platform</title>
+    <meta name="description" content="Orante Calc - Professional calculator suite for Financial, UAE Labour Law, Glass Engineering, Business & Utilities. Free to use.">
+    <meta name="keywords" content="calculator, ROI, compound interest, UAE gratuity, glass calculator, VAT, business tools, free calculator">
+    <meta name="author" content="Orante Calc">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Orante Calc | Professional Calculator Platform">
+    <meta property="og:description" content="Free professional calculators for Financial, UAE, Glass, Business & Utilities">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-calculator"></i> Orante Calc
+            </a>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Home</a></li>
+
+                <!-- Financial Dropdown -->
+                <li class="dropdown">
+                    <a href="#">Financial <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="pages/financial/roi.html">ROI Calculator</a></li>
+                        <li><a href="pages/financial/compound-interest.html">Compound Interest</a></li>
+                        <li><a href="pages/financial/simple-interest.html">Simple Interest</a></li>
+                        <li><a href="pages/financial/break-even.html">Break-Even</a></li>
+                        <li><a href="pages/financial/profit.html">Profit Calculator</a></li>
+                        <li><a href="pages/financial/profit-margin.html">Profit Margin</a></li>
+                        <li><a href="pages/financial/savings.html">Savings Growth</a></li>
+                        <li><a href="pages/financial/investment.html">Investment Growth</a></li>
+                        <li><a href="pages/financial/loan.html">Loan Calculator</a></li>
+                        <li><a href="pages/financial/emi.html">EMI Calculator</a></li>
+                    </ul>
+                </li>
+
+                <!-- UAE Dropdown -->
+                <li class="dropdown">
+                    <a href="#">UAE 🇦🇪 <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="pages/uae/gratuity.html">Gratuity Calculator</a></li>
+                        <li><a href="pages/uae/salary-report.html">Salary Report</a></li>
+                    </ul>
+                </li>
+
+                <!-- Glass Dropdown -->
+                <li class="dropdown">
+                    <a href="#">Glass <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="pages/glass/sgu.html">SGU Glass</a></li>
+                        <li><a href="pages/glass/dgu.html">DGU Glass</a></li>
+                        <li><a href="pages/glass/laminated.html">Laminated Glass</a></li>
+                        <li><a href="pages/glass/dgu-lam.html">DGU + Laminated</a></li>
+                        <li><a href="pages/glass/double-lam.html">Double Laminated</a></li>
+                        <li><a href="pages/glass/triple-lam.html">Triple Laminated</a></li>
+                    </ul>
+                </li>
+
+                <!-- Business Dropdown -->
+                <li class="dropdown">
+                    <a href="#">Business <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="pages/business/vat.html">VAT Calculator</a></li>
+                        <li><a href="pages/business/gst.html">GST Calculator</a></li>
+                        <li><a href="pages/business/discount.html">Discount</a></li>
+                        <li><a href="pages/business/markup.html">Markup</a></li>
+                        <li><a href="pages/business/commission.html">Commission</a></li>
+                        <li><a href="pages/business/revenue.html">Revenue</a></li>
+                        <li><a href="pages/business/net-profit.html">Net Profit</a></li>
+                        <li><a href="pages/business/invoice.html">Invoice</a></li>
+                    </ul>
+                </li>
+
+                <!-- Utilities Dropdown -->
+                <li class="dropdown">
+                    <a href="#">Utilities <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="pages/utilities/currency.html">Currency</a></li>
+                        <li><a href="pages/utilities/percentage.html">Percentage</a></li>
+                        <li><a href="pages/utilities/age.html">Age</a></li>
+                        <li><a href="pages/utilities/date-diff.html">Date Difference</a></li>
+                        <li><a href="pages/utilities/unit-converter.html">Units</a></li>
+                        <li><a href="pages/utilities/area.html">Area</a></li>
+                        <li><a href="pages/utilities/weight.html">Weight</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="pages/dashboard/analytics.html">Dashboard</a></li>
+                <li><a href="contact.html" class="btn-contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-bg">
+            <div class="hero-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+
+        <div class="container hero-content">
+            <div class="hero-badge">
+                <span class="badge-new">NEW</span>
+                <span>UAE Gratuity Calculator Now Live! 🇦🇪</span>
+            </div>
+
+            <h1>Professional<br><span class="text-gradient">Calculator Suite</span></h1>
+
+            <p>Powerful, accurate, and easy-to-use calculators for Financial Planning, UAE Labour Law, Glass Engineering, Business & Utilities. All in one free platform.</p>
+
+            <div class="hero-buttons">
+                <a href="#calculators" class="btn btn-primary btn-lg">
+                    <i class="fa-solid fa-rocket"></i> Get Started
+                </a>
+                <a href="about.html" class="btn btn-outline btn-lg">
+                    <i class="fa-solid fa-info-circle"></i> Learn More
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" data-target="50">0</span>
+                    <span class="stat-label">+ Calculators</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-target="100">0</span>
+                    <span class="stat-label">K+ Users</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-target="99">0</span>
+                    <span class="stat-label">% Accuracy</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">Free</span>
+                    <span class="stat-label">To Use</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Calculator Categories -->
+    <section class="categories" id="calculators">
+        <div class="container">
+            <div class="section-header">
+                <h2>Calculator Modules</h2>
+                <p>Choose from our wide range of professional calculators</p>
+            </div>
+
+            <div class="category-grid">
+                <!-- Financial -->
+                <div class="category-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                    </div>
+                    <h3>Financial</h3>
+                    <p>ROI, Interest, Profit, Loans, Investment calculators</p>
+                    <ul class="card-links">
+                        <li><a href="pages/financial/roi.html">ROI Calculator →</a></li>
+                        <li><a href="pages/financial/compound-interest.html">Compound Interest →</a></li>
+                        <li><a href="pages/financial/emi.html">EMI Calculator →</a></li>
+                        <li><a href="pages/financial/profit-margin.html">Profit Margin →</a></li>
+                    </ul>
+                    <a href="pages/financial/roi.html" class="btn btn-sm">View All</a>
+                </div>
+
+                <!-- UAE Module (Featured) -->
+                <div class="category-card featured">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-plane-departure"></i>
+                    </div>
+                    <span class="badge-featured">POPULAR 🇦🇪</span>
+                    <h3>UAE Module</h3>
+                    <p>End of Service Gratuity & Salary calculators</p>
+                    <ul class="card-links">
+                        <li><a href="pages/uae/gratuity.html">Gratuity Calculator →</a></li>
+                        <li><a href="pages/uae/salary-report.html">Salary Report →</a></li>
+                    </ul>
+                    <a href="pages/uae/gratuity.html" class="btn btn-sm">Calculate Now</a>
+                </div>
+
+                <!-- Glass Engineering -->
+                <div class="category-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-window-maximize"></i>
+                    </div>
+                    <h3>Glass Engineering</h3>
+                    <p>SGU, DGU, Laminated glass weight calculators</p>
+                    <ul class="card-links">
+                        <li><a href="pages/glass/sgu.html">SGU Glass →</a></li>
+                        <li><a href="pages/glass/dgu.html">DGU Glass →</a></li>
+                        <li><a href="pages/glass/laminated.html">Laminated →</a></li>
+                    </ul>
+                    <a href="pages/glass/sgu.html" class="btn btn-sm">View All</a>
+                </div>
+
+                <!-- Business -->
+                <div class="category-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-shop"></i>
+                    </div>
+                    <h3>Business</h3>
+                    <p>VAT, GST, Discount, Markup, Commission tools</p>
+                    <ul class="card-links">
+                        <li><a href="pages/business/vat.html">VAT Calculator →</a></li>
+                        <li><a href="pages/business/discount.html">Discount →</a></li>
+                        <li><a href="pages/business/invoice.html">Invoice →</a></li>
+                    </ul>
+                    <a href="pages/business/vat.html" class="btn btn-sm">View All</a>
+                </div>
+
+                <!-- Utilities -->
+                <div class="category-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-tools"></i>
+                    </div>
+                    <h3>Utilities</h3>
+                    <p>Currency, Percentage, Units, Age & more</p>
+                    <ul class="card-links">
+                        <li><a href="pages/utilities/currency.html">Currency →</a></li>
+                        <li><a href="pages/utilities/percentage.html">Percentage →</a></li>
+                        <li><a href="pages/utilities/unit-converter.html">Units →</a></li>
+                    </ul>
+                    <a href="pages/utilities/currency.html" class="btn btn-sm">View All</a>
+                </div>
+
+                <!-- Dashboard -->
+                <div class="category-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics</h3>
+                    <p>Track investments, income & portfolio</p>
+                    <ul class="card-links">
+                        <li><a href="pages/dashboard/analytics.html">Dashboard →</a></li>
+                    </ul>
+                    <a href="pages/dashboard/analytics.html" class="btn btn-sm">Open Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Orante Calc?</h2>
+                <p>Professional features designed for accuracy and ease of use</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fa-solid fa-bolt"></i>
+                    <h4>Fast & Accurate</h4>
+                    <p>Real-time calculations with 99.9% accuracy using professional formulas</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-mobile-alt"></i>
+                    <h4>Mobile Ready</h4>
+                    <p>Fully responsive design works perfectly on all devices</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <h4>PDF Export</h4>
+                    <p>Download professional reports in PDF format instantly</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-globe"></i>
+                    <h4>Multi-Language</h4>
+                    <p>Support for 100+ languages worldwide</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Calculate?</h2>
+            <p>Start using our professional calculators today. It's completely free!</p>
+            <a href="#calculators" class="btn btn-light btn-lg">
+                <i class="fa-solid fa-calculator"></i> Get Started Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <i class="fa-solid fa-calculator"></i> Orante Calc
+                    </a>
+                    <p>Professional calculator suite for Financial, UAE Labour Law, Glass Engineering, Business & Utilities.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Calculators</h4>
+                    <ul>
+                        <li><a href="pages/financial/roi.html">ROI Calculator</a></li>
+                        <li><a href="pages/uae/gratuity.html">UAE Gratuity</a></li>
+                        <li><a href="pages/glass/dgu.html">Glass Weight</a></li>
+                        <li><a href="pages/business/vat.html">VAT Calculator</a></li>
+                        <li><a href="pages/utilities/currency.html">Currency</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Orante Calc. All Rights Reserved.</p>
+                <p>Made with <i class="fa-solid fa-heart text-error"></i> for professionals</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

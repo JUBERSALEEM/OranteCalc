@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing | Orante Calc</title>
+    <meta name="description" content="Pricing - Orante Calc">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-calculator"></i> Orante Calc
+            </a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="pricing.html" class="active">Pricing</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero" style="padding: 80px 0;">
+        <div class="container hero-content">
+            <h1>Simple <span class="text-gradient">Pricing</span></h1>
+            <p>Choose the plan that works for you</p>
+        </div>
+    </header>
+
+    <section class="page-content">
+        <div class="container">
+            <div class="category-grid">
+                <div class="category-card featured">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-gift"></i>
+                    </div>
+                    <span class="badge-featured">FREE</span>
+                    <h3>Basic</h3>
+                    <p>Perfect for individuals</p>
+                    <h2 class="text-primary">$0<span style="font-size: 14px;">/forever</span></h2>
+                    <ul class="card-links">
+                        <li>✓ All basic calculators</li>
+                        <li>✓ UAE Gratuity</li>
+                        <li>✓ PDF Export</li>
+                        <li>✓ Mobile ready</li>
+                    </ul>
+                    <button class="btn btn-primary">Get Started</button>
+                </div>
+
+                <div class="category-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <h3>Business</h3>
+                    <p>For teams & businesses</p>
+                    <h2 class="text-primary">$29<span style="font-size: 14px;">/month</span></h2>
+                    <ul class="card-links">
+                        <li>✓ Everything in Free</li>
+                        <li>✓ Unlimited exports</li>
+                        <li>✓ Priority support</li>
+                        <li>✓ Custom branding</li>
+                    </ul>
+                    <button class="btn btn-outline">Coming Soon</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Orante Calc. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

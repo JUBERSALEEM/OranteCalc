@@ -1,0 +1,21 @@
+# Visual Studio
+.vs/
+.vscode/
+*.user
+*.suo
+*.useross
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]uild/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Common auto-generated files
+*.log
+*.tmp
