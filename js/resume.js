@@ -26,7 +26,7 @@ function selectTemplate(template) {
     currentTemplate = template;
     document.querySelectorAll('.rb-template').forEach(t => t.classList.remove('active'));
     event.target.closest('.rb-template').classList.add('active');
-    document.getElementById('previewFrame').src = 'pages/resume/templates/' + template + '.html';
+    document.getElementById('previewFrame').src = 'templates/' + template + '.html';
     updatePreview();
 }
 
