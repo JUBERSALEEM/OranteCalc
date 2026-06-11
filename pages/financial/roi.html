@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROI Calculator | Orante Calc</title>
+    <meta name="description" content="Calculate Return on Investment (ROI) with our free online calculator">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo">
+                <i class="fa-solid fa-calculator"></i> Orante Calc
+            </a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="roi.html" class="active">Financial</a></li>
+                <li><a href="../uae/gratuity.html">UAE</a></li>
+                <li><a href="../glass/sgu.html">Glass</a></li>
+                <li><a href="../business/vat.html">Business</a></li>
+                <li><a href="../utilities/currency.html">Utilities</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="hero" style="padding: 60px 0; min-height: auto;">
+        <div class="container hero-content">
+            <h1><i class="fa-solid fa-arrow-trend-up"></i> ROI Calculator</h1>
+            <p>Calculate Return on Investment and Annualized ROI</p>
+        </div>
+    </header>
+
+    <!-- Calculator Section -->
+    <section class="page-content">
+        <div class="container">
+            <div class="calculator-layout">
+                <!-- Input Form -->
+                <div class="calc-form">
+                    <h2><i class="fa-solid fa-sliders"></i> Investment Details</h2>
+
+                    <div class="form-group">
+                        <label>Initial Investment ($)</label>
+                        <input type="number" id="initial-investment" class="form-control" placeholder="e.g. 10000">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Final Value ($)</label>
+                        <input type="number" id="final-value" class="form-control" placeholder="e.g. 15000">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Investment Period (Years)</label>
+                            <input type="number" id="years" class="form-control" placeholder="e.g. 2" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Investment Period (Months)</label>
+                            <input type="number" id="months" class="form-control" placeholder="e.g. 6" value="0">
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-calculate" onclick="calculateROI()">
+                        <i class="fa-solid fa-calculator"></i> Calculate ROI
+                    </button>
+                </div>
+
+                <!-- Results -->
+                <div class="calc-result">
+                    <div class="result-card">
+                        <h3><i class="fa-solid fa-chart-line"></i> Results</h3>
+
+                        <div class="result-box" id="result-box">
+                            <div class="result-row">
+                                <span class="label">Total Return</span>
+                                <span class="value" id="total-return">$0</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="label">ROI Percentage</span>
+                                <span class="value text-primary" id="roi-percent">0%</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="label">Annualized ROI</span>
+                                <span class="value text-success" id="annualized-roi">0%</span>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info mt-4" id="formula-info">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <div class="alert-content">
+                                <div class="alert-title">Formula Used</div>
+                                <div class="alert-message">ROI = (Final Value - Initial Investment) / Initial Investment × 100</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Calculators -->
+    <section class="related-calcs">
+        <div class="container">
+            <h3>Related Calculators</h3>
+            <div class="related-grid">
+                <a href="compound-interest.html" class="related-card">
+                    <i class="fa-solid fa-percent"></i>
+                    <span>Compound Interest</span>
+                </a>
+                <a href="profit-margin.html" class="related-card">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Profit Margin</span>
+                </a>
+                <a href="emi.html" class="related-card">
+                    <i class="fa-solid fa-money-bill"></i>
+                    <span>EMI Calculator</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Orante Calc. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../js/main.js"></script>
+    <script src="../../js/calcs.js"></script>
+</body>
+</html>
