@@ -51,10 +51,6 @@
             margin-bottom: 15px;
         }
 
-            .roi-input::placeholder {
-                color: #666;
-            }
-
         .roi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
@@ -246,10 +242,6 @@
 
     <script src="../../js/main.js"></script>
     <script>
-        // ============================================
-        // ORANTE CALC - ROI CALCULATOR
-        // ============================================
-
         function getRate(amount) {
             if (amount <= 500) return 0.0125;
             if (amount >= 501 && amount <= 5000) return 0.015;
@@ -276,10 +268,8 @@
             return "R1";
         }
 
-        // Single ID - Live Update
         function single() {
             let w = Number(document.getElementById("wealth").value);
-
             if (isNaN(w) || w <= 0) {
                 document.getElementById("rate").innerText = "0%";
                 document.getElementById("weekly").innerText = "$0";
@@ -289,14 +279,12 @@
                 document.getElementById("breakEven").innerText = "0";
                 return;
             }
-
             let rate = getRate(w);
             let weekly = roi(w);
             let monthly = weekly * 52 / 12;
             let yearly = weekly * 52;
             let invest = w + 60;
             let be = monthly > 0 ? (invest / monthly).toFixed(1) : 0;
-
             document.getElementById("rate").innerText = (rate * 100).toFixed(2) + "%";
             document.getElementById("weekly").innerText = "$" + weekly.toFixed(2);
             document.getElementById("monthly").innerText = "$" + monthly.toFixed(2);
@@ -305,23 +293,19 @@
             document.getElementById("breakEven").innerText = be + " M";
         }
 
-        // Multi ID - Button Click
         function calculateMulti() {
             let a = Number(document.getElementById("id1").value);
             let b = Number(document.getElementById("id2").value);
             let c = Number(document.getElementById("id3").value);
-
             if (isNaN(a)) a = 0;
             if (isNaN(b)) b = 0;
             if (isNaN(c)) c = 0;
-
             let invest = (a + 60) + (b + 60) + (c + 60);
             let weekly = roi(a) + roi(b) + roi(c);
             let monthly = weekly * 52 / 12;
             let yearly = weekly * 52;
             let matched = Math.min(b, c);
             let matching = matched * 0.03;
-
             document.getElementById("tripInvestment").innerText = "$" + invest.toFixed(2);
             document.getElementById("tripWeekly").innerText = "$" + weekly.toFixed(2);
             document.getElementById("tripMonthly").innerText = "$" + monthly.toFixed(2);
@@ -331,7 +315,6 @@
             document.getElementById("rank").innerText = rank(matched * 2);
         }
 
-        // Event Listeners - Live Update
         document.getElementById("wealth").addEventListener("input", single);
         document.getElementById("id1").addEventListener("input", calculateMulti);
         document.getElementById("id2").addEventListener("input", calculateMulti);
