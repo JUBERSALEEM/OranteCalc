@@ -110,7 +110,7 @@
                 <li><a href="../../index.html">Home</a></li>
                 <li><a href="../financial/roi.html">Financial</a></li>
                 <li><a href="../uae/gratuity.html">UAE 🇦🇪</a></li>
-                <li><a href="index.html" class="active">Glass 🪟</a></li>
+                <li><a href="glass.html" class="active">Glass 🪟</a></li>
                 <li><a href="../business/vat.html">Business</a></li>
                 <li><a href="../utilities/currency.html">Utilities</a></li>
             </ul>
@@ -130,12 +130,12 @@
 
                 <!-- Glass Type Tabs -->
                 <div class="roi-tabs">
-                    <button class="roi-tab active" onclick="showGlass('sgu')">SGU</button>
-                    <button class="roi-tab" onclick="showGlass('dgu')">DGU</button>
-                    <button class="roi-tab" onclick="showGlass('lam')">Laminated</button>
-                    <button class="roi-tab" onclick="showGlass('dguLam')">DGU + Lam</button>
-                    <button class="roi-tab" onclick="showGlass('doubleLam')">Double Lam</button>
-                    <button class="roi-tab" onclick="showGlass('tripleLam')">Triple Lam</button>
+                    <button class="roi-tab active" onclick="showGlass('sgu',this)">SGU</button>
+                    <button class="roi-tab" onclick="showGlass('dgu',this)">DGU</button>
+                    <button class="roi-tab" onclick="showGlass('lam',this)">Laminated</button>
+                    <button class="roi-tab" onclick="showGlass('dguLam',this)">DGU + Lam</button>
+                    <button class="roi-tab" onclick="showGlass('doubleLam',this)">Double Lam</button>
+                    <button class="roi-tab" onclick="showGlass('tripleLam',this)">Triple Lam</button>
                 </div>
 
                 <!-- SGU -->
@@ -155,9 +155,8 @@
                     <h2>Double Glass Unit (DGU)</h2>
                     <input type="number" id="dguL" class="roi-input" placeholder="Length (mm)">
                     <input type="number" id="dguH" class="roi-input" placeholder="Height (mm)">
-                    <input type="number" id="dguT1" class="roi-input" placeholder="Glass 1 Thickness (mm)">
-                    <input type="number" id="dguT2" class="roi-input" placeholder="Glass 2 Thickness (mm)">
-                    <input type="number" id="dguGap" class="roi-input" placeholder="Gap (mm)" value="12">
+                    <input type="number" id="dguT1" class="roi-input" placeholder="Glass 1 (mm)">
+                    <input type="number" id="dguT2" class="roi-input" placeholder="Glass 2 (mm)">
                     <div class="roi-grid">
                         <div class="roi-box"><div class="roi-label">Area</div><div class="roi-value" id="dguArea">0 m²</div></div>
                         <div class="roi-box"><div class="roi-label">Weight</div><div class="roi-value roi-purple" id="dguWeight">0 kg</div></div>
@@ -178,7 +177,7 @@
                     </div>
                 </div>
 
-                <!-- DGU + Laminated -->
+                <!-- DGU + Lam -->
                 <div class="roi-card" id="dguLam" style="display:none;">
                     <h2>DGU + Laminated</h2>
                     <input type="number" id="dguLamL" class="roi-input" placeholder="Length (mm)">
@@ -189,7 +188,7 @@
                     </div>
                 </div>
 
-                <!-- Double Laminated -->
+                <!-- Double Lam -->
                 <div class="roi-card" id="doubleLam" style="display:none;">
                     <h2>Double Laminated</h2>
                     <input type="number" id="dblL" class="roi-input" placeholder="Length (mm)">
@@ -200,7 +199,7 @@
                     </div>
                 </div>
 
-                <!-- Triple Laminated -->
+                <!-- Triple Lam -->
                 <div class="roi-card" id="tripleLam" style="display:none;">
                     <h2>Triple Laminated</h2>
                     <input type="number" id="triL" class="roi-input" placeholder="Length (mm)">
@@ -220,63 +219,62 @@
     </footer>
 
     <script src="../../js/main.js"></script>
-    <script>let currentGlass = 'sgu';
+    <script>
+        function showGlass(type, btn) {
+            document.querySelectorAll('.roi-card').forEach(c => c.style.display = 'none');
+            document.getElementById(type).style.display = 'block';
+            document.querySelectorAll('.roi-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+        }
 
-function showGlass(type){
-    document.querySelectorAll('.roi-card').forEach(c => c.style.display = 'none');
-    document.getElementById(type).style.display = 'block';
-    document.querySelectorAll('.roi-tab').forEach(t => t.classList.remove('active'));
-    event.target.classList.add('active');
-    currentGlass = type;
-}
+        function calcSGU() {
+            let l = Number(document.getElementById("sguL").value) / 1000;
+            let h = Number(document.getElementById("sguH").value) / 1000;
+            let t = Number(document.getElementById("sguT").value) || 4;
+            if (isNaN(l) || isNaN(h)) return;
+            let area = l * h;
+            let weight = area * t * 2.5;
+            document.getElementById("sguArea").innerText = area.toFixed(2) + " m²";
+            document.getElementById("sguWeight").innerText = weight.toFixed(2) + " kg";
+        }
 
-function calcSGU(){
-    let l = Number(document.getElementById("sguL").value) / 1000;
-    let h = Number(document.getElementById("sguH").value) / 1000;
-    let t = Number(document.getElementById("sguT").value);
-    if(isNaN(l) || isNaN(h) || isNaN(t)) return;
-    let area = l * h;
-    let weight = area * t * 2.5;
-    document.getElementById("sguArea").innerText = area.toFixed(2) + " m²";
-    document.getElementById("sguWeight").innerText = weight.toFixed(2) + " kg";
-}
+        function calcDGU() {
+            let l = Number(document.getElementById("dguL").value) / 1000;
+            let h = Number(document.getElementById("dguH").value) / 1000;
+            let t1 = Number(document.getElementById("dguT1").value) || 4;
+            let t2 = Number(document.getElementById("dguT2").value) || 4;
+            if (isNaN(l) || isNaN(h)) return;
+            let area = l * h;
+            let weight = area * (t1 + t2) * 2.5;
+            document.getElementById("dguArea").innerText = area.toFixed(2) + " m²";
+            document.getElementById("dguWeight").innerText = weight.toFixed(2) + " kg";
+        }
 
-function calcDGU(){
-    let l = Number(document.getElementById("dguL").value) / 1000;
-    let h = Number(document.getElementById("dguH").value) / 1000;
-    let t1 = Number(document.getElementById("dguT1").value);
-    let t2 = Number(document.getElementById("dguT2").value);
-    if(isNaN(l) || isNaN(h)) return;
-    let area = l * h;
-    let weight = area * ((t1||4) + (t2||4)) * 2.5;
-    document.getElementById("dguArea").innerText = area.toFixed(2) + " m²";
-    document.getElementById("dguWeight").innerText = weight.toFixed(2) + " kg";
-}
+        function calcLam() {
+            let l = Number(document.getElementById("lamL").value) / 1000;
+            let h = Number(document.getElementById("lamH").value) / 1000;
+            let t1 = Number(document.getElementById("lamT1").value) || 4;
+            let pvb = Number(document.getElementById("lamT2").value) || 0.38;
+            let t2 = Number(document.getElementById("lamT3").value) || 4;
+            if (isNaN(l) || isNaN(h)) return;
+            let area = l * h;
+            let weight = area * (t1 + pvb + t2) * 2.5;
+            document.getElementById("lamArea").innerText = area.toFixed(2) + " m²";
+            document.getElementById("lamWeight").innerText = weight.toFixed(2) + " kg";
+        }
 
-function calcLam(){
-    let l = Number(document.getElementById("lamL").value) / 1000;
-    let h = Number(document.getElementById("lamH").value) / 1000;
-    let t1 = Number(document.getElementById("lamT1").value);
-    let pvb = Number(document.getElementById("lamT2").value) || 0.38;
-    let t2 = Number(document.getElementById("lamT3").value);
-    if(isNaN(l) || isNaN(h)) return;
-    let area = l * h;
-    let weight = area * ((t1||4) + pvb + (t2||4)) * 2.5;
-    document.getElementById("lamArea").innerText = area.toFixed(2) + " m²";
-    document.getElementById("lamWeight").innerText = weight.toFixed(2) + " kg";
-}
-
-document.getElementById("sguL").addEventListener("input", calcSGU);
-document.getElementById("sguH").addEventListener("input", calcSGU);
-document.getElementById("sguT").addEventListener("input", calcSGU);
-document.getElementById("dguL").addEventListener("input", calcDGU);
-document.getElementById("dguH").addEventListener("input", calcDGU);
-document.getElementById("dguT1").addEventListener("input", calcDGU);
-document.getElementById("dguT2").addEventListener("input", calcDGU);
-document.getElementById("lamL").addEventListener("input", calcLam);
-document.getElementById("lamH").addEventListener("input", calcLam);
-document.getElementById("lamT1").addEventListener("input", calcLam);
-document.getElementById("lamT2").addEventListener("input", calcLam);
-document.getElementById("lamT3").addEventListener("input", calcLam);</script>
+        document.getElementById("sguL").addEventListener("input", calcSGU);
+        document.getElementById("sguH").addEventListener("input", calcSGU);
+        document.getElementById("sguT").addEventListener("input", calcSGU);
+        document.getElementById("dguL").addEventListener("input", calcDGU);
+        document.getElementById("dguH").addEventListener("input", calcDGU);
+        document.getElementById("dguT1").addEventListener("input", calcDGU);
+        document.getElementById("dguT2").addEventListener("input", calcDGU);
+        document.getElementById("lamL").addEventListener("input", calcLam);
+        document.getElementById("lamH").addEventListener("input", calcLam);
+        document.getElementById("lamT1").addEventListener("input", calcLam);
+        document.getElementById("lamT2").addEventListener("input", calcLam);
+        document.getElementById("lamT3").addEventListener("input", calcLam);
+    </script>
 </body>
 </html>
