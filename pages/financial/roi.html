@@ -21,33 +21,93 @@
             --gold: #fbbf24;
         }
 
-        .grid {
+        .roi-container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .roi-card {
+            background: var(--card);
+            border: 1px solid #312e81;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+            .roi-card h2 {
+                margin-bottom: 20px;
+                color: #ddd6fe;
+                font-size: 20px;
+            }
+
+        .roi-input {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: #22193d;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+            .roi-input::placeholder {
+                color: #666;
+            }
+
+        .roi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+            grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
             gap: 15px;
         }
 
-        .box {
+        .roi-box {
             background: var(--card2);
-            padding: 15px;
+            padding: 20px;
             border-radius: 14px;
             text-align: center;
         }
 
-        .label {
+        .roi-label {
             font-size: 13px;
             color: var(--muted);
+            margin-bottom: 8px;
         }
 
-        .value {
-            margin-top: 5px;
-            font-size: 22px;
+        .roi-value {
+            font-size: 24px;
             font-weight: bold;
+            color: white;
         }
 
-        .gold {
+        .roi-gold {
             color: var(--gold);
         }
+
+        .roi-purple {
+            color: var(--purple);
+        }
+
+        .roi-green {
+            color: #22c55e;
+        }
+
+        .roi-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--purple);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+            .roi-btn:hover {
+                background: #7c3aed;
+            }
     </style>
 </head>
 <body>
@@ -80,55 +140,98 @@
 
     <section class="page-content">
         <div class="container">
-            <div class="calculator-layout">
-                <div class="calc-form">
-                    <h2><i class="fa-solid fa-sliders"></i> Investment Details</h2>
+            <div class="roi-container">
 
-                    <div class="form-group">
-                        <label>Initial Investment ($)</label>
-                        <input type="number" id="initial-investment" class="form-control" placeholder="e.g. 10000">
-                    </div>
+                <!-- Single ID Calculator -->
+                <div class="roi-card">
+                    <h2>💜 Single ID Calculator</h2>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Investment Period (Years)</label>
-                            <input type="number" id="years" class="form-control" value="0">
+                    <input type="number" id="wealth" class="roi-input" placeholder="Enter Wealth Package">
+
+                    <div class="roi-grid">
+                        <div class="roi-box">
+                            <div class="roi-label">ROI Rate</div>
+                            <div class="roi-value roi-purple" id="rate">0%</div>
                         </div>
-                        <div class="form-group">
-                            <label>Investment Period (Months)</label>
-                            <input type="number" id="months" class="form-control" value="0">
+                        <div class="roi-box">
+                            <div class="roi-label">Weekly ROI</div>
+                            <div class="roi-value" id="weekly">$0</div>
                         </div>
-                    </div>
-
-                    <button type="button" class="btn-calculate" onclick="calculateROI()">
-                        <i class="fa-solid fa-calculator"></i> Calculate ROI
-                    </button>
-                </div>
-
-                <div class="calc-result">
-                    <div class="result-card">
-                        <h3><i class="fa-solid fa-chart-line"></i> Results</h3>
-
-                        <div class="result-box" id="result-box" class="show">
-                            <div class="result-row">
-                                <span class="label">ROI Rate</span>
-                                <span class="value text-primary" id="roi-rate">0%</span>
-                            </div>
-                            <div class="result-row">
-                                <span class="label">Total Return</span>
-                                <span class="value" id="total-return">$0</span>
-                            </div>
-                            <div class="result-row">
-                                <span class="label">ROI Percentage</span>
-                                <span class="value text-primary" id="roi-percent">0%</span>
-                            </div>
-                            <div class="result-row">
-                                <span class="label">Annualized ROI</span>
-                                <span class="value text-success" id="annualized-roi">0%</span>
-                            </div>
+                        <div class="roi-box">
+                            <div class="roi-label">Monthly ROI</div>
+                            <div class="roi-value" id="monthly">$0</div>
+                        </div>
+                        <div class="roi-box">
+                            <div class="roi-label">Yearly ROI</div>
+                            <div class="roi-value" id="yearly">$0</div>
+                        </div>
+                        <div class="roi-box">
+                            <div class="roi-label">Investment</div>
+                            <div class="roi-value" id="investment">$0</div>
+                        </div>
+                        <div class="roi-box">
+                            <div class="roi-label">Break Even</div>
+                            <div class="roi-value roi-green" id="breakEven">0</div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Multi ID Calculator -->
+                <div class="roi-card">
+                    <h2>🔗 Multi ID Calculator</h2>
+
+                    <div class="roi-grid">
+                        <input type="number" id="id1" class="roi-input" placeholder="ID 1 Wealth">
+                        <input type="number" id="id2" class="roi-input" placeholder="ID 2 Wealth">
+                        <input type="number" id="id3" class="roi-input" placeholder="ID 3 Wealth">
+                    </div>
+
+                    <button type="button" class="roi-btn" onclick="calculateMulti()">Calculate Multi ID</button>
+
+                    <div class="roi-grid" style="margin-top:20px;">
+                        <div class="roi-box">
+                            <div class="roi-label">Total Investment</div>
+                            <div class="roi-value" id="tripInvestment">$0</div>
+                        </div>
+                        <div class="roi-box">
+                            <div class="roi-label">Weekly ROI</div>
+                            <div class="roi-value" id="tripWeekly">$0</div>
+                        </div>
+                        <div class="roi-box">
+                            <div class="roi-label">Monthly ROI</div>
+                            <div class="roi-value" id="tripMonthly">$0</div>
+                        </div>
+                        <div class="roi-box">
+                            <div class="roi-label">Yearly ROI</div>
+                            <div class="roi-value" id="tripYearly">$0</div>
+                        </div>
+                        <div class="roi-box">
+                            <div class="roi-label">Matching Bonus</div>
+                            <div class="roi-value roi-gold" id="matching">$0</div>
+                        </div>
+                        <div class="roi-box">
+                            <div class="roi-label">V1 Reward</div>
+                            <div class="roi-value roi-gold">$240</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rank Estimator -->
+                <div class="roi-card">
+                    <h2>🏆 Rank Estimator</h2>
+
+                    <div class="roi-grid">
+                        <div class="roi-box">
+                            <div class="roi-label">Current Rank</div>
+                            <div class="roi-value roi-purple" id="rank">R0</div>
+                        </div>
+                        <div class="roi-box">
+                            <div class="roi-label">Matched Volume</div>
+                            <div class="roi-value" id="matched">$0</div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -142,6 +245,97 @@
     </footer>
 
     <script src="../../js/main.js"></script>
-    <script src="../../js/calcs.js"></script>
+    <script>
+        // ============================================
+        // ORANTE CALC - ROI CALCULATOR
+        // ============================================
+
+        function getRate(amount) {
+            if (amount <= 500) return 0.0125;
+            if (amount >= 501 && amount <= 5000) return 0.015;
+            if (amount >= 5001 && amount <= 15000) return 0.0175;
+            if (amount >= 15001) return 0.02;
+            return 0;
+        }
+
+        function roi(x) {
+            return x * getRate(x);
+        }
+
+        function rank(volume) {
+            if (volume >= 30000000) return "R11";
+            if (volume >= 15000000) return "R10";
+            if (volume >= 6000000) return "R9";
+            if (volume >= 2500000) return "R8";
+            if (volume >= 1000000) return "R7";
+            if (volume >= 400000) return "R6";
+            if (volume >= 150000) return "R5";
+            if (volume >= 50000) return "R4";
+            if (volume >= 25000) return "R3";
+            if (volume >= 10000) return "R2";
+            return "R1";
+        }
+
+        // Single ID - Live Update
+        function single() {
+            let w = Number(document.getElementById("wealth").value);
+
+            if (isNaN(w) || w <= 0) {
+                document.getElementById("rate").innerText = "0%";
+                document.getElementById("weekly").innerText = "$0";
+                document.getElementById("monthly").innerText = "$0";
+                document.getElementById("yearly").innerText = "$0";
+                document.getElementById("investment").innerText = "$0";
+                document.getElementById("breakEven").innerText = "0";
+                return;
+            }
+
+            let rate = getRate(w);
+            let weekly = roi(w);
+            let monthly = weekly * 52 / 12;
+            let yearly = weekly * 52;
+            let invest = w + 60;
+            let be = monthly > 0 ? (invest / monthly).toFixed(1) : 0;
+
+            document.getElementById("rate").innerText = (rate * 100).toFixed(2) + "%";
+            document.getElementById("weekly").innerText = "$" + weekly.toFixed(2);
+            document.getElementById("monthly").innerText = "$" + monthly.toFixed(2);
+            document.getElementById("yearly").innerText = "$" + yearly.toFixed(2);
+            document.getElementById("investment").innerText = "$" + invest.toFixed(2);
+            document.getElementById("breakEven").innerText = be + " M";
+        }
+
+        // Multi ID - Button Click
+        function calculateMulti() {
+            let a = Number(document.getElementById("id1").value);
+            let b = Number(document.getElementById("id2").value);
+            let c = Number(document.getElementById("id3").value);
+
+            if (isNaN(a)) a = 0;
+            if (isNaN(b)) b = 0;
+            if (isNaN(c)) c = 0;
+
+            let invest = (a + 60) + (b + 60) + (c + 60);
+            let weekly = roi(a) + roi(b) + roi(c);
+            let monthly = weekly * 52 / 12;
+            let yearly = weekly * 52;
+            let matched = Math.min(b, c);
+            let matching = matched * 0.03;
+
+            document.getElementById("tripInvestment").innerText = "$" + invest.toFixed(2);
+            document.getElementById("tripWeekly").innerText = "$" + weekly.toFixed(2);
+            document.getElementById("tripMonthly").innerText = "$" + monthly.toFixed(2);
+            document.getElementById("tripYearly").innerText = "$" + yearly.toFixed(2);
+            document.getElementById("matching").innerText = "$" + matching.toFixed(2);
+            document.getElementById("matched").innerText = "$" + matched.toFixed(2);
+            document.getElementById("rank").innerText = rank(matched * 2);
+        }
+
+        // Event Listeners - Live Update
+        document.getElementById("wealth").addEventListener("input", single);
+        document.getElementById("id1").addEventListener("input", calculateMulti);
+        document.getElementById("id2").addEventListener("input", calculateMulti);
+        document.getElementById("id3").addEventListener("input", calculateMulti);
+    </script>
 </body>
 </html>
