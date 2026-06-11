@@ -9,16 +9,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../css/style.css">
+
     <style>
+        /* LIGHT THEME - PROPER ALIGNMENT */
         :root {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --card2: #f1f5f9;
+            --purple: #8b5cf6;
+            --purple-light: #a78bfa;
+            --yellow: #f59e0b;
+            --yellow-light: #fef3c7;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        /* Dark mode */
+        body.dark-mode {
             --bg: #080513;
             --card: #141026;
             --card2: #1b1432;
-            --purple: #8b5cf6;
+            --text: #f8fafc;
+            --text-muted: #b9a6ff;
+            --border: #312e81;
             --yellow: #fbbf24;
-            --yellow-light: #fef3c7;
-            --text: #fff;
-            --muted: #b9a6ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: all 0.3s;
         }
 
         .rb-container {
@@ -28,15 +58,17 @@
 
         .rb-layout {
             display: grid;
-            grid-template-columns: 300px 1fr 380px;
+            grid-template-columns: 280px 1fr 350px;
             gap: 20px;
             padding: 0 20px;
+            align-items: start;
         }
 
         /* Sidebar */
         .rb-sidebar {
             background: var(--card);
-            border-radius: 18px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
             padding: 20px;
             position: sticky;
             top: 90px;
@@ -62,7 +94,7 @@
                 display: block;
                 font-size: 13px;
                 font-weight: 600;
-                color: var(--muted);
+                color: var(--text-muted);
                 margin-bottom: 10px;
             }
 
@@ -70,7 +102,7 @@
             width: 100%;
             padding: 12px;
             background: var(--card2);
-            border: 1px solid #312e81;
+            border: 1px solid var(--border);
             border-radius: 10px;
             color: var(--text);
             font-size: 14px;
@@ -84,8 +116,8 @@
         /* Template Cards */
         .rb-template-grid {
             display: grid;
-            grid-template-columns: repeat(2,1fr);
-            gap: 8px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
         }
 
         .rb-template {
@@ -95,15 +127,22 @@
             cursor: pointer;
             border: 2px solid transparent;
             text-align: center;
+            transition: all 0.3s;
         }
+
+            .rb-template:hover {
+                border-color: var(--purple-light);
+                transform: translateY(-2px);
+            }
 
             .rb-template.active {
                 border-color: var(--purple);
-                background: #2d2755;
+                background: var(--purple);
+                color: white;
             }
 
         .rb-template-preview {
-            height: 50px;
+            height: 45px;
             background: var(--border);
             border-radius: 6px;
             margin-bottom: 6px;
@@ -111,44 +150,50 @@
 
         .rb-template span {
             font-size: 11px;
-            color: var(--muted);
+            color: var(--text-muted);
+        }
+
+        .rb-template.active span {
+            color: white;
         }
 
         .rb-export-btns {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         /* Form */
         .rb-form {
             background: var(--card);
-            border-radius: 18px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
             padding: 25px;
         }
 
         .rb-form-section {
             margin-bottom: 25px;
             padding-bottom: 20px;
-            border-bottom: 1px solid #312e81;
+            border-bottom: 1px solid var(--border);
         }
 
+            .rb-form-section:last-child {
+                border-bottom: none;
+            }
+
             .rb-form-section h3 {
-                font-size: 18px;
-                color: var(--yellow);
+                font-size: 16px;
+                color: var(--purple);
+                font-weight: 600;
                 margin-bottom: 15px;
                 display: flex;
                 align-items: center;
                 gap: 10px;
             }
 
-                .rb-form-section h3 i {
-                    color: var(--purple);
-                }
-
         .rb-grid {
             display: grid;
-            grid-template-columns: repeat(2,1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         }
 
@@ -159,43 +204,53 @@
             .rb-group label {
                 display: block;
                 font-size: 13px;
-                color: var(--muted);
+                color: var(--text-muted);
                 margin-bottom: 6px;
+                font-weight: 500;
             }
 
                 .rb-group label .required {
-                    color: var(--yellow);
+                    color: var(--danger);
                 }
 
         .rb-input {
             width: 100%;
             padding: 12px;
             background: var(--card2);
-            border: 1px solid #312e81;
+            border: 1px solid var(--border);
             border-radius: 10px;
             color: var(--text);
             font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s;
         }
 
+            .rb-input:focus {
+                outline: none;
+                border-color: var(--purple);
+                box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+            }
+
             .rb-input::placeholder {
-                color: #666;
+                color: var(--text-muted);
             }
 
         .rb-textarea {
             width: 100%;
             padding: 12px;
             background: var(--card2);
-            border: 1px solid #312e81;
+            border: 1px solid var(--border);
             border-radius: 10px;
             color: var(--text);
             font-size: 14px;
             min-height: 100px;
             resize: vertical;
+            font-family: inherit;
         }
 
         .rb-help {
             font-size: 11px;
-            color: var(--muted);
+            color: var(--text-muted);
             margin-top: 4px;
             display: block;
         }
@@ -210,12 +265,18 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            transition: all 0.3s;
         }
 
         .rb-btn-primary {
             background: var(--purple);
-            color: #fff;
+            color: white;
         }
+
+            .rb-btn-primary:hover {
+                background: var(--purple-light);
+                transform: translateY(-2px);
+            }
 
         .rb-btn-secondary {
             background: var(--card2);
@@ -223,15 +284,30 @@
             border: 1px solid var(--purple);
         }
 
+            .rb-btn-secondary:hover {
+                background: var(--purple);
+                color: white;
+            }
+
         .rb-btn-outline {
             background: transparent;
             color: var(--text);
             border: 1px solid var(--border);
         }
 
+            .rb-btn-outline:hover {
+                border-color: var(--purple);
+                color: var(--purple);
+            }
+
         .rb-btn-sm {
             padding: 8px 12px;
             font-size: 12px;
+        }
+
+        .rb-btn-success {
+            background: var(--success);
+            color: white;
         }
 
         .rb-add-btn {
@@ -240,6 +316,10 @@
             justify-content: space-between;
             margin-bottom: 15px;
         }
+
+            .rb-add-btn h3 {
+                margin-bottom: 0;
+            }
 
         /* Skills Tags */
         .rb-skill-tags {
@@ -251,17 +331,30 @@
 
         .rb-skill-tag {
             background: var(--purple);
-            color: #fff;
+            color: white;
             padding: 4px 10px;
             border-radius: 20px;
             font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
+
+            .rb-skill-tag i {
+                cursor: pointer;
+                opacity: 0.7;
+            }
+
+                .rb-skill-tag i:hover {
+                    opacity: 1;
+                }
 
         /* Preview */
         .rb-preview {
             background: var(--card);
-            border-radius: 18px;
-            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 15px;
             position: sticky;
             top: 90px;
         }
@@ -270,12 +363,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
             .rb-preview-header h3 {
-                font-size: 16px;
-                color: var(--yellow);
+                font-size: 14px;
+                margin: 0;
             }
 
         .rb-preview-controls {
@@ -284,26 +377,42 @@
         }
 
             .rb-preview-controls button {
-                padding: 8px 12px;
+                padding: 6px 10px;
                 background: var(--card2);
                 border: none;
-                border-radius: 8px;
-                color: var(--muted);
+                border-radius: 6px;
+                color: var(--text-muted);
                 cursor: pointer;
+                font-size: 12px;
+                transition: all 0.3s;
             }
 
+                .rb-preview-controls button:hover,
                 .rb-preview-controls button.active {
                     background: var(--purple);
-                    color: #fff;
+                    color: white;
                 }
 
         .rb-preview-frame {
             width: 100%;
-            height: calc(100vh - 200px);
+            height: 600px;
             border: none;
-            border-radius: 12px;
-            background: #fff;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
+
+        /* Print Button in Preview */
+        .rb-preview-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+            .rb-preview-actions .rb-btn {
+                flex: 1;
+                justify-content: center;
+            }
 
         /* Dynamic Items */
         .rb-item {
@@ -317,19 +426,29 @@
         .rb-item-header {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text-muted);
         }
 
         .rb-item-remove {
             color: var(--danger);
             cursor: pointer;
+            font-size: 14px;
         }
+
+            .rb-item-remove:hover {
+                color: #dc2626;
+            }
 
         /* Checkbox */
         .rb-checkbox {
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 13px;
         }
 
             .rb-checkbox input {
@@ -338,23 +457,10 @@
                 accent-color: var(--purple);
             }
 
-        /* Current Working */
-        .rb-checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-            .rb-checkbox-label input {
-                width: 16px;
-                height: 16px;
-                accent-color: var(--purple);
-            }
-
+        /* Responsive */
         @media (max-width: 1400px) {
             .rb-layout {
-                grid-template-columns: 280px 1fr 320px;
+                grid-template-columns: 260px 1fr 320px;
             }
         }
 
@@ -364,7 +470,72 @@
             }
 
             .rb-sidebar, .rb-preview {
+                position: static;
+            }
+
+            .rb-preview {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .rb-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rb-layout {
+                padding: 0 10px;
+            }
+
+            .rb-form, .rb-sidebar, .rb-preview {
+                padding: 15px;
+            }
+        }
+
+        /* PRINT STYLES - Hide form, show only resume */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .rb-preview-frame,
+            .rb-preview-frame * {
+                visibility: visible;
+            }
+
+            .rb-preview-frame {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: auto;
+            }
+
+            /* Hide sidebar and form */
+            .rb-sidebar,
+            .rb-form {
+                display: none !important;
+            }
+
+            .rb-layout {
+                display: block;
+            }
+
+            .rb-preview {
+                position: static;
+                border: none;
+                padding: 0;
+            }
+
+            .rb-preview-header,
+            .rb-preview-controls,
+            .rb-preview-actions {
                 display: none;
+            }
+
+            .rb-preview-frame {
+                height: auto;
+                box-shadow: none;
             }
         }
     </style>
@@ -380,25 +551,25 @@
                 <li><a href="../financial/roi.html">Financial</a></li>
                 <li><a href="../uae/gratuity.html">UAE 🇦🇪</a></li>
                 <li><a href="../glass/glass.html">Glass 🪟</a></li>
-                <li><a href="../resume/index.html" class="active">Resume Builder 📄</a></li>
+                <li><a href="index.html" class="active">Resume Builder 📄</a></li>
                 <li><a href="../business/vat.html">Business</a></li>
                 <li><a href="../utilities/currency.html">Utilities</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="hero" style="padding:40px 0;min-height:auto;">
+    <header class="hero" style="padding: 30px 0; min-height: auto;">
         <div class="container hero-content">
             <h1><i class="fa-solid fa-file Resume Pro"></i> Resume Builder Pro</h1>
-            <p>Create professional resumes in 100+ languages • ATS-friendly • PDF/DOCX export</p>
+            <p>Create professional resumes in 100+ languages • ATS-friendly • PDF Export</p>
         </div>
     </header>
 
-    <section class="page-content" style="padding:20px 0;">
+    <section class="page-content" style="padding: 20px 0;">
         <div class="rb-container">
             <div class="rb-layout">
 
-                <!-- SIDEBAR -->
+                                <!-- SIDEBAR -->
                 <div class="rb-sidebar">
                     <div class="rb-section">
                         <label><i class="fa-solid fa-globe"></i> Select Country</label>
@@ -435,27 +606,27 @@
                         <label><i class="fa-solid fa-palette"></i> Template</label>
                         <div class="rb-template-grid">
                             <div class="rb-template active" onclick="selectTemplate('ats')">
-                                <div class="rb-template-preview" style="background:linear-gradient(var(--purple),var(--card2) 30%,var(--card2) 70%,var(--purple))"></div>
+                                <div class="rb-template-preview" style="background: linear-gradient(180deg, #2563eb 0%, #e2e8f0 50%, #2563eb 100%);"></div>
                                 <span>ATS</span>
                             </div>
                             <div class="rb-template" onclick="selectTemplate('modern')">
-                                <div class="rb-template-preview" style="background:linear-gradient(90deg,var(--purple) 0%,var(--card2) 50%,var(--purple) 100%)"></div>
+                                <div class="rb-template-preview" style="background: linear-gradient(90deg, #8b5cf6 0%, #e2e8f0 50%, #8b5cf6 100%);"></div>
                                 <span>Modern</span>
                             </div>
                             <div class="rb-template" onclick="selectTemplate('executive')">
-                                <div class="rb-template-preview" style="background:var(--purple)"></div>
+                                <div class="rb-template-preview" style="background: #1e293b;"></div>
                                 <span>Executive</span>
                             </div>
                             <div class="rb-template" onclick="selectTemplate('minimal')">
-                                <div class="rb-template-preview" style="background:#333"></div>
+                                <div class="rb-template-preview" style="background: #64748b;"></div>
                                 <span>Minimal</span>
                             </div>
                             <div class="rb-template" onclick="selectTemplate('creative')">
-                                <div class="rb-template-preview" style="background:linear-gradient(45deg,var(--purple),var(--yellow))"></div>
+                                <div class="rb-template-preview" style="background: linear-gradient(45deg, #8b5cf6, #f59e0b);"></div>
                                 <span>Creative</span>
                             </div>
                             <div class="rb-template" onclick="selectTemplate('academic')">
-                                <div class="rb-template-preview" style="background:#444"></div>
+                                <div class="rb-template-preview" style="background: linear-gradient(180deg, #374151 0%, #e5e7eb 100%);"></div>
                                 <span>Academic</span>
                             </div>
                         </div>
@@ -464,9 +635,12 @@
                     <div class="rb-section">
                         <label><i class="fa-solid fa-file-export"></i> Export</label>
                         <div class="rb-export-btns">
-                            <button class="rb-btn rb-btn-primary" onclick="exportPDF()"><i class="fa-solid fa-file-pdf"></i> PDF</button>
-                            <button class="rb-btn rb-btn-secondary" onclick="exportDOCX()"><i class="fa-solid fa-file-word"></i> DOCX</button>
-                            <button class="rb-btn rb-btn-outline" onclick="printResume()"><i class="fa-solid fa-print"></i> Print</button>
+                            <button class="rb-btn rb-btn-primary" onclick="downloadPDF()">
+                                <i class="fa-solid fa-download"></i> Download PDF
+                            </button>
+                            <button class="rb-btn rb-btn-secondary" onclick="printResume()">
+                                <i class="fa-solid fa-print"></i> Print / PDF
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -528,11 +702,6 @@
                                 <input type="url" class="rb-input" id="portfolio" placeholder="https://yourportfolio.com">
                             </div>
                         </div>
-                        <div class="rb-group">
-                            <label>Profile Photo</label>
-                            <input type="file" class="rb-input" id="photo" accept="image/*">
-                            <span class="rb-help">Max 2MB. White background recommended.</span>
-                        </div>
                     </div>
 
                     <!-- Summary -->
@@ -540,7 +709,6 @@
                         <h3><i class="fa-solid fa-align-left"></i> Professional Summary</h3>
                         <div class="rb-group">
                             <textarea class="rb-textarea" id="summary" placeholder="Write a professional summary describing your experience, skills, achievements, and career goals."></textarea>
-                            <button class="rb-btn rb-btn-sm rb-btn-outline" onclick="generateAISummary()" style="margin-top:8px;"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate with AI</button>
                         </div>
                     </div>
 
@@ -548,7 +716,9 @@
                     <div class="rb-form-section">
                         <div class="rb-add-btn">
                             <h3><i class="fa-solid fa-briefcase"></i> Work Experience</h3>
-                            <button class="rb-btn rb-btn-sm rb-btn-primary" onclick="addExperience()"><i class="fa-solid fa-plus"></i> Add</button>
+                            <button class="rb-btn rb-btn-sm rb-btn-primary" onclick="addExperience()">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
                         </div>
                         <div id="experienceList"></div>
                     </div>
@@ -557,11 +727,13 @@
                     <div class="rb-form-section">
                         <div class="rb-add-btn">
                             <h3><i class="fa-solid fa-graduation-cap"></i> Education</h3>
-                            <button class="rb-btn rb-btn-sm rb-btn-primary" onclick="addEducation()"><i class="fa-solid fa-plus"></i> Add</button>
+                            <button class="rb-btn rb-btn-sm rb-btn-primary" onclick="addEducation()">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
                         </div>
                         <div id="educationList"></div>
                     </div>
-                    
+
                     <!-- Skills -->
                     <div class="rb-form-section">
                         <h3><i class="fa-solid fa-code"></i> Skills</h3>
@@ -588,25 +760,29 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Certifications -->
                     <div class="rb-form-section">
                         <div class="rb-add-btn">
                             <h3><i class="fa-solid fa-certificate"></i> Certifications</h3>
-                            <button class="rb-btn rb-btn-sm rb-btn-primary" onclick="addCertification()"><i class="fa-solid fa-plus"></i> Add</button>
+                            <button class="rb-btn rb-btn-sm rb-btn-primary" onclick="addCertification()">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
                         </div>
                         <div id="certificationList"></div>
                     </div>
-                    
+
                     <!-- Projects -->
                     <div class="rb-form-section">
                         <div class="rb-add-btn">
                             <h3><i class="fa-solid fa-project-diagram"></i> Projects</h3>
-                            <button class="rb-btn rb-btn-sm rb-btn-primary" onclick="addProject()"><i class="fa-solid fa-plus"></i> Add</button>
+                            <button class="rb-btn rb-btn-sm rb-btn-primary" onclick="addProject()">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
                         </div>
                         <div id="projectList"></div>
                     </div>
-                    
+
                     <!-- Achievements -->
                     <div class="rb-form-section">
                         <h3><i class="fa-solid fa-trophy"></i> Achievements</h3>
@@ -614,7 +790,7 @@
                             <textarea class="rb-textarea" id="achievements" placeholder="Awards, recognitions, competitions..."></textarea>
                         </div>
                     </div>
-                    
+
                     <!-- References -->
                     <div class="rb-form-section">
                         <div class="rb-add-btn">
@@ -624,12 +800,14 @@
                                 <span>Show on Resume</span>
                             </label>
                         </div>
-                        <button class="rb-btn rb-btn-sm rb-btn-outline" onclick="addReference()"><i class="fa-solid fa-plus"></i> Add Reference</button>
-                        <div id="referenceList" style="margin-top:10px;"></div>
+                        <button class="rb-btn rb-btn-sm rb-btn-outline" onclick="addReference()">
+                            <i class="fa-solid fa-plus"></i> Add Reference
+                        </button>
+                        <div id="referenceList" style="margin-top: 10px;"></div>
                     </div>
-                    
+
                 </div>
-                
+
                 <!-- PREVIEW -->
                 <div class="rb-preview">
                     <div class="rb-preview-header">
@@ -641,17 +819,115 @@
                         </div>
                     </div>
                     <iframe id="previewFrame" class="rb-preview-frame" src="templates/ats.html"></iframe>
+                    
+                    <div class="rb-preview-actions">
+                        <button class="rb-btn rb-btn-primary" onclick="downloadPDF()">
+                            <i class="fa-solid fa-download"></i> Download
+                        </button>
+                        <button class="rb-btn rb-btn-outline" onclick="printResume()">
+                            <i class="fa-solid fa-print"></i> Print
+                        </button>
+                    </div>
                 </div>
-                
+
             </div>
         </div>
     </section>
 
     <footer class="footer">
-        <div class="container"><div class="footer-bottom"><p>&copy; 2024 Resume Builder Pro. All Rights Reserved.</p></div></div>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Resume Builder Pro. All Rights Reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <script src="../../js/main.js"></script>
     <script src="../../js/resume.js"></script>
+
+    <script>
+        /* ============================================
+           RESUME BUILDER - PRINT FIX & DOWNLOAD
+           ============================================ */
+
+        // Print Resume - Only prints preview, hides form
+        function printResume() {
+            const frame = document.getElementById('previewFrame');
+            
+            // First update preview with current data
+            updatePreview();
+            
+            // Then print
+            setTimeout(() => {
+                frame.contentWindow.print();
+            }, 500);
+        }
+
+        // Download PDF - Using browser print to PDF
+        function downloadPDF() {
+            const frame = document.getElementById('previewFrame');
+            
+            // Update preview first
+            updatePreview();
+            
+            setTimeout(() => {
+                // Open print dialog in iframe context
+                frame.contentWindow.focus();
+                frame.contentWindow.print();
+            }, 500);
+        }
+
+        // Update preview with form data
+        function updatePreview() {
+            const data = getFormData();
+            const frame = document.getElementById('previewFrame');
+            
+            if (frame && frame.contentWindow) {
+                frame.contentWindow.postMessage(data, '*');
+            }
+        }
+
+        // Get all form data
+        function getFormData() {
+            return {
+                fullName: document.getElementById('fullName')?.value || '',
+                jobTitle: document.getElementById('jobTitle')?.value || '',
+                email: document.getElementById('email')?.value || '',
+                phone: document.getElementById('phone')?.value || '',
+                whatsapp: document.getElementById('whatsapp')?.value || '',
+                nationality: document.getElementById('nationality')?.value || '',
+                address: document.getElementById('address')?.value || '',
+                dob: document.getElementById('dob')?.value || '',
+                linkedin: document.getElementById('linkedin')?.value || '',
+                portfolio: document.getElementById('portfolio')?.value || '',
+                summary: document.getElementById('summary')?.value || '',
+                techSkills: document.getElementById('techSkills')?.value || '',
+                softSkills: document.getElementById('softSkills')?.value || '',
+                softwareSkills: document.getElementById('softwareSkills')?.value || '',
+                languageSkills: document.getElementById('languageSkills')?.value || '',
+                achievements: document.getElementById('achievements')?.value || '',
+                country: document.getElementById('countrySelect')?.value || 'ae',
+                language: document.getElementById('langSelect')?.value || 'en',
+                template: window.currentTemplate || 'ats'
+            };
+        }
+
+        // Add live preview on input change
+        document.querySelectorAll('.rb-input, .rb-textarea').forEach(input => {
+            input.addEventListener('input', () => {
+                updatePreview();
+            });
+        });
+
+        // Listen for messages from preview iframe
+        window.addEventListener('message', (event) => {
+            console.log('Preview updated');
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updatePreview();
+        });
+    </script>
 </body>
 </html>

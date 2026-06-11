@@ -27,27 +27,30 @@ function selectTemplate(template) {
     document.querySelectorAll('.rb-template').forEach(t => t.classList.remove('active'));
     event.target.closest('.rb-template').classList.add('active');
     document.getElementById('previewFrame').src = 'templates/' + template + '.html';
-    updatePreview();
+
+    // Update preview after load
+    setTimeout(() => {
+        updatePreviewData();
+    }, 500);
 }
 
 // Country Change
 function changeCountry(country) {
     currentCountry = country;
-    updatePreview();
+    updatePreviewData();
 }
 
 // Language Change
 function changeLanguage(lang) {
     currentLang = lang;
-    updatePreview();
+    updatePreviewData();
 }
 
 // Live Preview Update
-function updatePreview() {
+function updatePreviewData() {
     const data = getFormData();
-    // Send data to preview iframe
     const frame = document.getElementById('previewFrame');
-    if (frame.contentWindow) {
+    if (frame && frame.contentWindow) {
         frame.contentWindow.postMessage(data, '*');
     }
 }
@@ -69,6 +72,7 @@ function getFormData() {
         techSkills: document.getElementById('techSkills')?.value || '',
         softSkills: document.getElementById('softSkills')?.value || '',
         softwareSkills: document.getElementById('softwareSkills')?.value || '',
+        achievements: document.getElementById('achievements')?.value || '',
         country: currentCountry,
         template: currentTemplate,
         language: currentLang
@@ -273,7 +277,10 @@ function addReference() {
 
 // Remove Item
 function removeItem(id) {
-    document.getElementById(id)?.remove();
+    const element = document.getElementById(id);
+    if (element) {
+        element.remove();
+    }
 }
 
 // Add Skill Tag
@@ -295,24 +302,49 @@ function setPreviewSize(size) {
     document.querySelectorAll('.rb-preview-controls button').forEach(b => b.classList.remove('active'));
     event.target.classList.add('active');
 
-    if (size === 'mobile') frame.style.width = '375px';
-    else if (size === 'tablet') frame.style.width = '768px';
-    else frame.style.width = '100%';
+    if (size === 'mobile') {
+        frame.style.width = '375px';
+        frame.style.margin = '0 auto';
+    } else if (size === 'tablet') {
+        frame.style.width = '768px';
+        frame.style.margin = '0 auto';
+    } else {
+        frame.style.width = '100%';
+        frame.style.margin = '0';
+    }
+}
+
+// Print Resume - FIXED
+function printResume() {
+    const frame = document.getElementById('previewFrame');
+
+    // Update preview with current form data first
+    updatePreviewData();
+
+    // Wait for data to update, then print
+    setTimeout(() => {
+        if (frame && frame.contentWindow) {
+            frame.contentWindow.focus();
+            frame.contentWindow.print();
+        } else {
+            window.print();
+        }
+    }, 500);
+}
+
+// Download PDF - Using print to PDF
+function downloadPDF() {
+    printResume();
 }
 
 // Export PDF (Placeholder)
 function exportPDF() {
-    alert('PDF Export coming soon! - Use Print (Ctrl+P) for now');
+    alert('PDF Export: Use Download PDF button or Ctrl+P to save as PDF');
 }
 
 // Export DOCX (Placeholder)
 function exportDOCX() {
-    alert('DOCX Export coming soon!');
-}
-
-// Print Resume
-function printResume() {
-    window.print();
+    alert('DOCX Export coming soon! Use Print to PDF for now.');
 }
 
 // AI Summary (Placeholder)
@@ -320,7 +352,37 @@ function generateAISummary() {
     alert('AI Summary Generator coming soon!');
 }
 
+// Auto-save to localStorage
+function saveToLocal() {
+    const data = getFormData();
+    localStorage.setItem('resumeData', JSON.stringify(data));
+}
+
+// Load from localStorage
+function loadFromLocal() {
+    const saved = localStorage.getItem('resumeData');
+    if (saved) {
+        const data = JSON.parse(saved);
+        Object.keys(data).forEach(key => {
+            const el = document.getElementById(key);
+            if (el) el.value = data[key];
+        });
+    }
+}
+
 // Add event listeners for live preview
-document.querySelectorAll('.rb-input, .rb-textarea').forEach(input => {
-    input.addEventListener('input', updatePreview);
+document.addEventListener('DOMContentLoaded', () => {
+    // Load saved data
+    loadFromLocal();
+
+    // Add input listeners
+    document.querySelectorAll('.rb-input, .rb-textarea').forEach(input => {
+        input.addEventListener('input', () => {
+            updatePreviewData();
+            saveToLocal();
+        });
+    });
+
+    // Initial preview update
+    updatePreviewData();
 });
