@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAE Gratuity Calculator | Orante Calc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        :root {
+            --bg: #080513;
+            --card: #141026;
+            --card2: #1b1432;
+            --purple: #8b5cf6;
+            --text: #ffffff;
+            --muted: #b9a6ff;
+            --gold: #fbbf24;
+        }
+
+        .roi-container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .roi-card {
+            background: var(--card);
+            border: 1px solid #312e81;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+            .roi-card h2 {
+                margin-bottom: 20px;
+                color: #ddd6fe;
+                font-size: 20px;
+            }
+
+        .roi-input {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: #22193d;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+            gap: 15px;
+        }
+
+        .roi-box {
+            background: var(--card2);
+            padding: 20px;
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .roi-label {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .roi-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .roi-gold {
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo"><i class="fa-solid fa-calculator"></i> Orante Calc</a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../financial/roi.html">Financial</a></li>
+                <li><a href="gratuity.html" class="active">UAE 🇦🇪</a></li>
+                <li><a href="../glass/sgu.html">Glass</a></li>
+                <li><a href="../business/vat.html">Business</a></li>
+                <li><a href="../utilities/currency.html">Utilities</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero" style="padding:60px 0;min-height:auto;">
+        <div class="container hero-content">
+            <h1>🇦🇪 UAE Gratuity Calculator</h1>
+            <p>Calculate End of Service Gratuity as per UAE Labour Law</p>
+        </div>
+    </header>
+
+    <section class="page-content">
+        <div class="container">
+            <div class="roi-container">
+                <div class="roi-card">
+                    <h2>👷 Gratuity Calculator</h2>
+                    <input type="number" id="salary" class="roi-input" placeholder="Basic Salary (AED)">
+                    <input type="date" id="startDate" class="roi-input">
+                    <input type="date" id="endDate" class="roi-input">
+                    <select id="reason" class="roi-input">
+                        <option value="resign">Resignation</option>
+                        <option value="terminate">Termination</option>
+                    </select>
+
+                    <div class="roi-grid">
+                        <div class="roi-box">
+                            <div class="roi-label">Service Duration</div>
+                            <div class="roi-value" id="duration">0 Years</div>
+                        </div>
+                        <div class="roi-box">
+                            <div class="roi-label">Daily Wage</div>
+                            <div class="roi-value" id="dailywage">AED 0</div>
+                        </div>
+                        <div class="roi-box">
+                            <div class="roi-label">Gratuity Days</div>
+                            <div class="roi-value" id="days">0 Days</div>
+                        </div>
+                        <div class="roi-box">
+                            <div class="roi-label">Total Gratuity</div>
+                            <div class="roi-value roi-gold" id="gratuity">AED 0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container"><div class="footer-bottom"><p>&copy; 2024 Orante Calc. All Rights Reserved.</p></div></div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>function calculateGratuity(){
+    let salary = Number(document.getElementById("salary").value);
+    let start = new Date(document.getElementById("startDate").value);
+    let end = new Date(document.getElementById("endDate").value);
+    let reason = document.getElementById("reason").value;
+
+    if(isNaN(salary) || isNaN(start) || isNaN(end)) return;
+
+    let diffTime = Math.abs(end - start);
+    let days = diffTime / (1000 * 60 * 60 * 24);
+    let years = days / 365;
+
+    let daily = salary / 30;
+    let daysRate = 21;
+
+    if(reason === "resign"){
+        if(years <= 1) daysRate = 0;
+        else if(years <= 3) daysRate = 7;
+        else if(years <= 5) daysRate = 14;
+    }else{
+        if(years > 5) daysRate = 30;
+    }
+
+    let eligible = Math.floor(years * daysRate);
+    let total = eligible * daily;
+
+    document.getElementById("duration").innerText = Math.floor(years) + " Years";
+    document.getElementById("dailywage").innerText = "AED " + daily.toFixed(2);
+    document.getElementById("days").innerText = eligible + " Days";
+    document.getElementById("gratuity").innerText = "AED " + total.toFixed(2);
+}
+
+document.getElementById("salary").addEventListener("input", calculateGratuity);
+document.getElementById("startDate").addEventListener("change", calculateGratuity);
+document.getElementById("endDate").addEventListener("change", calculateGratuity);
+document.getElementById("reason").addEventListener("change", calculateGratuity);</script>
+</body>
+</html>
